@@ -1,6 +1,6 @@
 # TI4 Map Playground w/ AutoBalancer
 
-## Worshop ID
+## Workshop ID
 1636304723
 
 ## Workshop Description
@@ -13,3 +13,5 @@ NOTE: this calculation is pretty naive. It does not take anomalies or wormholes 
 
 KNOWN BUGS
 * If all home systems are more than 2 tiles away, the calculations are often wrong
+
+AutoBalancer code is available on Github – github.com/sparkertime/tts-ti4/tree/master/mod_balancer

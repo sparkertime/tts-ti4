@@ -1,6 +1,6 @@
 # TI4 Streamlined & Scripted [BETA]
 
-## Worshop ID
+## Workshop ID
 1643134739
 
 ## Workshop Description
@@ -24,3 +24,4 @@ Originally this mod began as an attempt to port the_Mantis' unpack buttons into 
 FEATURES FOR SCRIPTERS
 * Consistent faction names and unit sizes
 * Each item is placed precisely relative to the player drawer. No guesswork or fudge factors in unit placement.
+* All source code I wrote for this is available on Github – github.com/sparkertime/tts-ti4/tree/master/mod_full
