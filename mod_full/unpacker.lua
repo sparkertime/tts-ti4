@@ -15,6 +15,7 @@ OWNER_TOKENS = {
     {x = -73, z = -14},
     {x = -71, z = -14},
   },
+  tokenRotation = 180,
   objectiveStartY = 1.8,
   objectiveYIncrement = 0.15
 }
@@ -654,7 +655,7 @@ function placeInitialOwnerTokens(drawer, obj)
     obj.takeObject({
       index = 0,
       position = position,
-      rotation = {0, 180, 0},
+      rotation = {0, OWNER_TOKENS.tokenRotation, 0},
       smooth = true
     })
   end
