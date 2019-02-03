@@ -1,3 +1,24 @@
+OWNER_TOKENS = {
+  scoreTrackPositions = {
+    {-73, 2, -10},
+    {-73, 2, -8.5},
+    {-72, 2, -10},
+    {-72, 2, -8.5},
+    {-71, 2, -10},
+    {-71, 2, -8.5},
+  },
+  objectiveStackPositions = {
+    {x = -73, z = -19.00},
+    {x = -71, z = -19.00},
+    {x = -73, z = -16.5},
+    {x = -71, z = -16.5},
+    {x = -73, z = -14},
+    {x = -71, z = -14},
+  },
+  objectiveStartY = 1.8,
+  objectiveYIncrement = 0.15
+}
+
 DRAWERS = {
   {
     playerNumber = 1,
@@ -351,45 +372,15 @@ function onload()
   })
 end
 
-function isInDrawer(obj)
-  local position = obj.getPosition()
+function click()
+  local allObjects = getAllObjects()
+  local allPlayers = findPlayers(allObjects)
 
-  for _, drawer in ipairs(DRAWERS) do
-    if position.x >= drawer.xMin and position.x <= drawer.xMax and position.z >= drawer.zMin and position.z <= drawer.zMax then
-      return drawer
-    end
+  for _, player in pairs(allPlayers) do
+    broadcastToAll("Setting up " .. player.factionName .. " on " .. player.color)
+    destroyObject(player.setupToken)
+    setupPlayer(player)
   end
-
-  return nil
-end
-
--- it would be nice for this to check if its in a player's hand as well
-function findDrawerForObject(obj)
-  local drawer = isInDrawer(obj)
-
-  if not drawer then
-    return nil
-  end
-  
-  local sheet = getObjectFromGUID(drawer.sheetGuid)
-  return {
-    color = drawer.color,
-    playerNumber = drawer.playerNumber,
-    sheet = sheet,
-    sheetPosition = sheet.getPosition(),
-    homeTilePosition = drawer.homeTilePosition,
-    bounds = {
-      xMin = drawer.xMin,
-      xMax = drawer.xMax,
-      zMin = drawer.zMin,
-      zMax = drawer.zMax
-    },
-    reverse = drawer.reverse
-  }
-end
-
-function error(message)
-  broadcastToAll("Unpacking Error: " .. message)
 end
 
 function findPlayers(allObjects)
@@ -431,22 +422,29 @@ function findPlayers(allObjects)
   return players
 end
 
-function addStartingTechs(players, allObjects)
-  for _, obj in ipairs(allObjects) do
-    local name = obj.getName()
-    if name then
-      for _, techName in ipairs(STARTING_TECH.techNames) do
-        if techName == name then
-          local drawer = isInDrawer(obj)
-          if not drawer then
-            error("Tech " .. techName .. "is not in or near a player drawer.")
-          elseif players[drawer.color] then
-            players[drawer.color].startingTechCards[techName] = obj
-          end
-        end
-      end
-    end
+-- it would be nice for this to check if its in a player's hand as well
+function findDrawerForObject(obj)
+  local drawer = isInDrawer(obj)
+
+  if not drawer then
+    return nil
   end
+  
+  local sheet = getObjectFromGUID(drawer.sheetGuid)
+  return {
+    color = drawer.color,
+    playerNumber = drawer.playerNumber,
+    sheet = sheet,
+    sheetPosition = sheet.getPosition(),
+    homeTilePosition = drawer.homeTilePosition,
+    bounds = {
+      xMin = drawer.xMin,
+      xMax = drawer.xMax,
+      zMin = drawer.zMin,
+      zMax = drawer.zMax
+    },
+    reverse = drawer.reverse
+  }
 end
 
 -- these keys MUST match what is in FACTIONS above.
@@ -526,6 +524,28 @@ function addFactions(players, allObjects)
   end
 end
 
+function addStartingTechs(players, allObjects)
+  for _, obj in ipairs(allObjects) do
+    local name = obj.getName()
+    if name then
+      for _, techName in ipairs(STARTING_TECH.techNames) do
+        if techName == name then
+          local drawer = isInDrawer(obj)
+          if not drawer then
+            error("Tech " .. techName .. "is not in or near a player drawer.")
+          elseif players[drawer.color] then
+            players[drawer.color].startingTechCards[techName] = obj
+          end
+        end
+      end
+    end
+  end
+end
+
+function error(message)
+  broadcastToAll("Unpacking Error: " .. message)
+end
+
 function positionFromSheet(sheetPosition, offset, reverse)
   local multiplier = reverse and -1 or 1
 
@@ -534,6 +554,67 @@ function positionFromSheet(sheetPosition, offset, reverse)
     y = sheetPosition.y + (offset.y or 0.1),
     z = sheetPosition.z + (multiplier * (offset.z or 0))
   }
+end
+
+function isInDrawer(obj)
+  local position = obj.getPosition()
+
+  for _, drawer in ipairs(DRAWERS) do
+    if position.x >= drawer.xMin and position.x <= drawer.xMax and position.z >= drawer.zMin and position.z <= drawer.zMax then
+      return drawer
+    end
+  end
+
+  return nil
+end
+
+OFFSETS = {
+  factionSheet = { x = 13, z = -0.4 },
+  commandBag = { x = -0.4, y = 0, z = -0.5 },
+  ownerBag = { x = -1.7, y = 0, z = -11 },
+  techCardBag = { x = 23, z = 3 },
+  planetCardBag = {x = 23, z = 1 },
+  promissaryNote = {x = 22, y = 0.5, z = -3.3}
+}
+
+function setupPlayer(player)
+  local unpackItem = function(guid, offset, callback)
+    local position = positionFromSheet(player.drawer.sheetPosition, offset, player.drawer.reverse)
+    local rotation = { x = 0, y = player.drawer.reverse and 180 or 0, z = 0 }
+    player.factionBox.takeObject({
+      guid = guid,
+      smooth = true,
+      position = position,
+      rotation = rotation,
+      callback_function = function(obj)
+        obj.setLock(true)
+        obj.setPosition(position)
+        obj.setRotation(rotation)
+        if callback then
+          callback(obj)
+        end
+      end
+    })
+  end
+  unpackItem(player.factionBoxGuids.sheetGuid, OFFSETS.factionSheet)
+  unpackItem(player.factionBoxGuids.commandBagGuid, OFFSETS.commandBag,
+    |obj| placeInitialCommandTokens(player.drawer, obj)
+  )
+  unpackItem(player.factionBoxGuids.ownerBagGuid, OFFSETS.ownerBag,
+    |obj| placeInitialOwnerTokens(player.drawer, obj)
+  )
+  unpackItem(player.factionBoxGuids.techCardBagGuid, OFFSETS.techCardBag,
+    |obj| placeTechCards(player, obj)
+  )
+  unpackItem(player.factionBoxGuids.planetCardBagGuid, OFFSETS.planetCardBag,
+    |obj| placePlanetCards(player.drawer, obj)
+  )
+  unpackItem(player.factionBoxGuids.promissaryNoteGuid, OFFSETS.promissaryNote,
+    |obj| obj.setLock(false)
+  )
+  setUnitNames(player)
+  unpackHomeSystem(player)
+  unpackTokens(player)
 end
 
 COMMAND_TOKENS = {
@@ -567,27 +648,6 @@ function placeInitialCommandTokens(drawer, obj)
     })
   end
 end
-
-OWNER_TOKENS = {
-  scoreTrackPositions = {
-    {-73, 2, -10},
-    {-73, 2, -8.5},
-    {-72, 2, -10},
-    {-72, 2, -8.5},
-    {-71, 2, -10},
-    {-71, 2, -8.5},
-  },
-  objectiveStackPositions = {
-    {x = -73, z = -19.00},
-    {x = -71, z = -19.00},
-    {x = -73, z = -16.5},
-    {x = -71, z = -16.5},
-    {x = -73, z = -14},
-    {x = -71, z = -14},
-  },
-  objectiveStartY = 1.8,
-  objectiveYIncrement = 0.15
-}
 
 function placeInitialOwnerTokens(drawer, obj)
   local placeToken = function(position)
@@ -705,55 +765,6 @@ function placePlanetCards(drawer, bag)
   end
 
   destroyObject(bag)
-end
-
-OFFSETS = {
-  factionSheet = { x = 13, z = -0.4 },
-  commandBag = { x = -0.4, y = 0, z = -0.5 },
-  ownerBag = { x = -1.7, y = 0, z = -11 },
-  techCardBag = { x = 23, z = 3 },
-  planetCardBag = {x = 23, z = 1 },
-  promissaryNote = {x = 22, y = 0.5, z = -3.3}
-}
-
-function setupPlayer(player)
-  local unpackItem = function(guid, offset, callback)
-    local position = positionFromSheet(player.drawer.sheetPosition, offset, player.drawer.reverse)
-    local rotation = { x = 0, y = player.drawer.reverse and 180 or 0, z = 0 }
-    player.factionBox.takeObject({
-      guid = guid,
-      smooth = true,
-      position = position,
-      rotation = rotation,
-      callback_function = function(obj)
-        obj.setLock(true)
-        obj.setPosition(position)
-        obj.setRotation(rotation)
-        if callback then
-          callback(obj)
-        end
-      end
-    })
-  end
-  unpackItem(player.factionBoxGuids.sheetGuid, OFFSETS.factionSheet)
-  unpackItem(player.factionBoxGuids.commandBagGuid, OFFSETS.commandBag,
-    |obj| placeInitialCommandTokens(player.drawer, obj)
-  )
-  unpackItem(player.factionBoxGuids.ownerBagGuid, OFFSETS.ownerBag,
-    |obj| placeInitialOwnerTokens(player.drawer, obj)
-  )
-  unpackItem(player.factionBoxGuids.techCardBagGuid, OFFSETS.techCardBag,
-    |obj| placeTechCards(player, obj)
-  )
-  unpackItem(player.factionBoxGuids.planetCardBagGuid, OFFSETS.planetCardBag,
-    |obj| placePlanetCards(player.drawer, obj)
-  )
-  unpackItem(player.factionBoxGuids.promissaryNoteGuid, OFFSETS.promissaryNote,
-    |obj| obj.setLock(false)
-  )
-  setUnitNames(player)
-  unpackHomeSystem(player)
-  unpackTokens(player)
 end
 
 UNIT_RENAMING = {
@@ -908,16 +919,5 @@ function unpackTokens(player)
       },
       rotation = { x = 0, y = player.drawer.reverse and 180 or 0, z = 0 },
     })
-  end
-end
-
-function click()
-  local allObjects = getAllObjects()
-  local allPlayers = findPlayers(allObjects)
-
-  for _, player in pairs(allPlayers) do
-    broadcastToAll("Setting up " .. player.factionName .. " on " .. player.color)
-    destroyObject(player.setupToken)
-    setupPlayer(player)
   end
 end
