@@ -379,7 +379,7 @@ function click()
 
   for _, player in pairs(allPlayers) do
     broadcastToAll("Setting up " .. player.factionName .. " on " .. player.color)
-    destroyObject(player.setupToken)
+    destroyObject(player.setupFactionCard)
     setupPlayer(player)
   end
 end
@@ -389,24 +389,24 @@ function findPlayers(allObjects)
   local factionsFound = {}
 
   for _, obj in ipairs(allObjects) do
-    local _, _, factionName = string.find(obj.getName() or "", "(.+) Owner Token$")
+    local _, _, factionName = string.find(obj.getName() or "", "(.+) Faction Card$")
     if factionName then
       local drawer = findDrawerForObject(obj)
       
       if drawer then
         if players[drawer.color] then
-          error("Multiple faction owner tokens found on drawer " .. drawer.color)
+          error("Multiple faction cards found on drawer " .. drawer.color)
           return {}
         end
         if factionsFound[factionName] then
-          error("Multiple players have faction owner tokens for " .. factionName)
+          error("Multiple players have faction cards for " .. factionName)
           return {}
         end
         players[drawer.color] = {
           drawer = drawer,
           color = drawer.color,
           factionName = factionName,
-          setupToken = obj,
+          setupFactionCard = obj,
           unitCollections = {},
           startingTechCards = {}
         }
