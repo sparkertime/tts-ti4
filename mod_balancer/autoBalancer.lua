@@ -141,7 +141,7 @@ RESOURCE_TILES = {
     planets = {"Lazar", "Sakulag"},
     resources = 3,
     influence = 1,
-    {yellows = 1},
+    skips = {yellows = 1},
     cultural = 0,
     industrial = 0,
     hazardous = 0
@@ -469,7 +469,7 @@ function writeTextAbove(tileObject, baseRotation, text)
     position = {
       x = tilePosition.x,
       y = tilePosition.y + 0.25,
-      z = tilePosition.z - 1.1
+      z = tilePosition.z - 2.2
     },
     rotation = {
       x = baseRotation.x + 90,
@@ -479,6 +479,7 @@ function writeTextAbove(tileObject, baseRotation, text)
   })
 
   textObject.TextTool.setValue(text)
+  textObject.TextTool.setFontSize(40)
   textObject.setName(LABEL_NAME)
   table.insert(LABELS, textObject)
 end
@@ -530,6 +531,7 @@ function findBalance()
       if #closestHomes == 1 then
         addToCount(homeSystem.homeSlice, system.tile, 1)
       end
+
       addToCount(homeSystem.total, system.tile, #closestHomes)
     end
   end
@@ -537,7 +539,7 @@ function findBalance()
   for _, homeSystem in ipairs(homeSystemsInPlay) do
     writeTextAbove(homeSystem.object, mecatol.getRotation(),
       homeSystem.name ..
-      "\n" ..
+      "\n\nHome\n" ..
       homeSystem.homeSlice.resources ..
       "/" ..
       homeSystem.homeSlice.influence ..
@@ -546,7 +548,7 @@ function findBalance()
       ((homeSystem.homeSlice.yellows > 0) and (homeSystem.homeSlice.yellows .. "Y") or "") ..
       ((homeSystem.homeSlice.reds > 0) and (homeSystem.homeSlice.reds .. "R") or "") ..
       ((homeSystem.homeSlice.greens > 0) and (homeSystem.homeSlice.greens .. "G") or "") ..
-      "\n" ..
+      "\n\nTotal\n" ..
       formatNumber(homeSystem.total.resources) ..
       "/" ..
       formatNumber(homeSystem.total.influence) ..
