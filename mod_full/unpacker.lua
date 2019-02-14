@@ -572,7 +572,7 @@ end
 OFFSETS = {
   factionSheet = { x = 13, z = -0.4 },
   commandBag = { x = -0.4, y = 0, z = -0.5 },
-  ownerBag = { x = -1.7, y = 0, z = -11 },
+  ownerBag = { x = 3.8, y = 0, z = -7.1 },
   techCardBag = { x = 23, z = 3 },
   planetCardBag = {x = 23, z = 1 },
   promissaryNote = {x = 22, y = 0.5, z = -3.3}
