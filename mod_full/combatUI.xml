@@ -1,0 +1,78 @@
+<!--
+  Current implementation plan
+  Each color gets its own panel with visibility set to only their color
+  Script detects cards and modifiers on the drawer and prepares a summary up top
+  The total stack looks something like this then:
+  TECHS & ACTION CARDS (expandable if we can)
+    summary of what is detected
+    prompt on "play cards on your drawer, tech board, or rail to have them detected here"
+    refresh
+  UNITS (w/ reset)
+    | UNITA | UNITB |
+    | - X + | - X + |
+    ...
+  TYPE (Space, Ground, AFB, Bombardment)
+    toggles, each one turns off all others
+  SUMMARY
+    Destroyers (2 rolls at 9+)
+    ...
+  ROLL!
+-->
+
+<Defaults>
+  <Panel
+    class='combatPanel'
+    outline='#912A1F'
+    color='#B5675E'
+    outlineSize='2 2'
+    padding='3 3 3 3'
+    allowDragging='false'
+    raycastTarget="true"
+    rectAlignment="UpperRight"
+    />
+</Defaults>
+
+<!-- Cleanup/Show Maps button -->
+<Panel
+  id="combatTogglePanel"
+  class='combatPanel'
+  active='true'
+  offsetXY="0 -50"
+  width="150"
+  height="50">
+  <ToggleButton
+    id="combatTogglePanel__button"
+    text="Show Combat Roller"
+    onValueChanged="toggleCombatRoller"
+    isOn='false'
+  />
+</Panel>
+
+<Panel
+  id='combatPanel'
+  class='combatPanel'
+  active='false'
+  offsetXY='0 -110'
+  width='400'
+  height='200'
+  flexibleHeight='1'
+  >
+  <VerticalLayout>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+    <Text>some text here</Text>
+  </VerticalLayout>
+</Panel>

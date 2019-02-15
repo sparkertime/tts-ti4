@@ -11,3 +11,14 @@ function onObjectEnterContainer(bag, obj)
     broadcastToAll("Token Warning: " .. objName .. " placed in container " .. bagName)
   end
 end
+
+-- functions for the combat roller
+function toggleCombatRoller(player, isOn, element)
+  if isOn == 'True' then
+    UI.setAttribute("combatTogglePanel__button", "text", 'Hide Combat Roller')
+    UI.setAttribute('combatPanel', 'active', true)
+  else
+    UI.setAttribute("combatTogglePanel__button", "text", 'Show Combat Roller')
+    UI.setAttribute('combatPanel', 'active', false)
+  end 
+end
