@@ -55,9 +55,7 @@ function setElementInnerXml(id, tableOfChildren)
 end
 
 function refreshCombatModifiers()
-  -- The below doesn't work - I need to wrap this setAttribute call into the setInnerXml call itself
-  UI.setAttribute('techAndActionCardList', 'height', 200)
-  setElementInnerXml('techAndActionCardList', {
+  techsAndCards = {
     {tag = 'Text', attributes={ text="Technology 1" }},
     {tag = 'Text', attributes={ text="Technology 2" }},
     {tag = 'Text', attributes={ text="Technology 3" }},
@@ -68,6 +66,9 @@ function refreshCombatModifiers()
     {tag = 'Text', attributes={ text="Technology 2" }},
     {tag = 'Text', attributes={ text="Technology 2" }},
     {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 10" }},
-  })
+    {tag = 'Text', attributes={ text="Technology 10" }}
+  }
+  setElementInnerXml('techAndActionCardList', techsAndCards)
+  local height = math.max(#techsAndCards*17, 98)
+  Wait.frames(|| UI.setAttribute('techAndActionCardList', 'height', height), 2)
 end
