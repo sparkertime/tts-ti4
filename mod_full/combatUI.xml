@@ -20,16 +20,40 @@
 -->
 
 <Defaults>
+  <Button
+    color='#ffdddd'
+  />
+  <Panel
+    allowDragging='false'
+    raycastTarget="true"
+    rectAlignment="UpperRight"
+  />
+  <VerticalLayout
+    allowDragging='false'
+    raycastTarget="true"
+    rectAlignment="UpperRight"
+  />
   <Panel
     class='combatPanel'
     outline='#912A1F'
     color='#B5675E'
     outlineSize='2 2'
-    padding='3 3 3 3'
     allowDragging='false'
     raycastTarget="true"
     rectAlignment="UpperRight"
-    />
+  />
+  <VerticalLayout
+    class='combatSection'
+    outline='#912A1F'
+    color='#ffffff'
+    padding='6 6 3 3'
+  />
+  <Text
+    class='sectionTitle'
+    fontStyle='Bold'
+    preferredHeight='20'
+    flexibleHeight='0'
+  />
 </Defaults>
 
 <!-- Cleanup/Show Maps button -->
@@ -37,6 +61,7 @@
   id="combatTogglePanel"
   class='combatPanel'
   active='true'
+  padding='3 3 3 3'
   offsetXY="0 -50"
   width="150"
   height="50">
@@ -54,25 +79,74 @@
   active='false'
   offsetXY='0 -110'
   width='400'
-  height='200'
-  flexibleHeight='1'
-  >
-  <VerticalLayout>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
-    <Text>some text here</Text>
+  height='80%'
+  flexibleHeight='true'>
+  <VerticalLayout
+    height='100%'
+    childForceExpandHeight='0'
+    spacing='5'>
+
+    <VerticalLayout
+      class='combatSection'
+      preferredHeight='150'
+      flexibleHeight='0'
+      childForceExpandHeight='0'>
+      <Text
+        class='sectionTitle'>
+        TECHS / ACTION CARDS
+      </Text>
+      <Text flexibleHeight='1'>(summary here)</Text>
+      <Button
+        id="refreshButton"
+        text="Refresh"
+        onClick='refreshCombatModifiers'
+        preferredHeight='20'
+        flexibleHeight='0'
+      />
+    </VerticalLayout>
+
+    <VerticalLayout
+      class='combatSection'
+      flexibleHeight='1'
+      >
+      <Text class='sectionTitle'>UNITS</Text>
+    </VerticalLayout>
+
+    <VerticalLayout 
+      class='combatSection'
+      preferredHeight='60'
+      flexibleHeight='0'
+      childForceExpandHeight='0'>
+      <Text class='sectionTitle'>ROLL TYPE</Text>
+      <Dropdown
+        id="Selection"
+        onValueChanged="optionSelected"
+        flexibleHeight='1'
+      >
+        <Option selected="true">Combat</Option>
+        <Option>Space Cannon</Option>
+        <Option>Bombardment</Option>
+        <Option>Anti-Fighter Barrage</Option>
+      </Dropdown>
+    </VerticalLayout>
+
+    <VerticalLayout
+      class='combatSection'
+      preferredHeight='100'
+      flexibleHeight='0'
+      childForceExpandHeight='0'>
+      <Text class='sectionTitle'>SUMMARY</Text>
+      <Text flexibleHeight='1'>(summary here)</Text>
+    </VerticalLayout>
+
+    <Button
+      id="rollButton"
+      text="Roll!"
+      onClick='rollCombatDice'
+      fontSize='18'
+      preferredHeight='50'
+      flexibleHeight='0'
+      fontStyle='Bold'
+      />
   </VerticalLayout>
 </Panel>

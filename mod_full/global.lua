@@ -12,7 +12,12 @@ function onObjectEnterContainer(bag, obj)
   end
 end
 
--- functions for the combat roller
+-------------------------------------
+-------------------------------------
+-- functions for the combat roller --
+-------------------------------------
+-------------------------------------
+
 function toggleCombatRoller(player, isOn, element)
   if isOn == 'True' then
     UI.setAttribute("combatTogglePanel__button", "text", 'Hide Combat Roller')
