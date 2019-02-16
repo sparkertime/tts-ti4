@@ -27,3 +27,47 @@ function toggleCombatRoller(player, isOn, element)
     UI.setAttribute('combatPanel', 'active', false)
   end 
 end
+
+function describeElement(element)
+  local tag = '<' .. element.tag .. ' '
+  for key, value in pairs(element.attributes) do
+    local val = (type(value) == 'table' and '(table)') or value
+    tag = tag .. key .. '=' .. val .. ' '
+  end
+  broadcastToAll(tag .. ' />')
+end
+
+function findElement(id, uiCollection)
+  for _, element in pairs(uiCollection) do
+    if element.attributes.id == id then return element end
+    if element.children and #element.children > 0 then
+      local foundElement = findElement(id, element.children)
+      if foundElement then return foundElement end
+    end
+  end
+end
+
+function setElementInnerXml(id, tableOfChildren)
+  local uiCollection = UI.getXmlTable()
+  local element = findElement(id, uiCollection)
+  element.children = tableOfChildren
+  UI.setXmlTable(uiCollection)
+end
+
+function refreshCombatModifiers()
+  -- The below doesn't work - I need to wrap this setAttribute call into the setInnerXml call itself
+  UI.setAttribute('techAndActionCardList', 'height', 200)
+  setElementInnerXml('techAndActionCardList', {
+    {tag = 'Text', attributes={ text="Technology 1" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 3" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 2" }},
+    {tag = 'Text', attributes={ text="Technology 10" }},
+  })
+end

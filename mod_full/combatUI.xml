@@ -51,14 +51,16 @@
   <Text
     class='sectionTitle'
     fontStyle='Bold'
-    preferredHeight='20'
+    fontSize='16'
+    preferredHeight='25'
     flexibleHeight='0'
+  />
+  <Option
+    fontStyle='Bold'
   />
 </Defaults>
 
-<!-- Cleanup/Show Maps button -->
 <Panel
-  id="combatTogglePanel"
   class='combatPanel'
   active='true'
   padding='3 3 3 3'
@@ -95,7 +97,11 @@
         class='sectionTitle'>
         TECHS / ACTION CARDS
       </Text>
-      <Text flexibleHeight='1'>(summary here)</Text>
+      <VerticalScrollView flexibleHeight='1' verticalScrollbarVisibility='AutoHide'>
+        <VerticalLayout id='techAndActionCardList' childForceExpandHeight='0' height='98' color='#ffffff'>
+          <Text>Tech 1</Text>
+        </VerticalLayout>
+      </VerticalScrollView>
       <Button
         id="refreshButton"
         text="Refresh"
@@ -119,7 +125,6 @@
       childForceExpandHeight='0'>
       <Text class='sectionTitle'>ROLL TYPE</Text>
       <Dropdown
-        id="Selection"
         onValueChanged="optionSelected"
         flexibleHeight='1'
       >
