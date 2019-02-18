@@ -2,5 +2,7 @@
   * Scan for cards & summarize
   * Update summary anytime the unit count, roll type, or tech/action summary changes
   * Roll & announce results
+  * Add reset button
+  * Convert to other colors
 * Convert techs into non-stackable tiles
 * Strat / Initiative tracking?

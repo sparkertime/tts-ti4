@@ -55,20 +55,7 @@ function setElementInnerXml(id, tableOfChildren)
 end
 
 function refreshCombatModifiers()
-  techsAndCards = {
-    {tag = 'Text', attributes={ text="Technology 1" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 3" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 2" }},
-    {tag = 'Text', attributes={ text="Technology 10" }}
-  }
-  setElementInnerXml('techAndActionCardList', techsAndCards)
-  local height = math.max(#techsAndCards*17, 98)
-  Wait.frames(|| UI.setAttribute('techAndActionCardList', 'height', height), 2)
+  techs = {'Tech1', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4'}
+  UI.setAttribute('techActionCardSummaryText--red', 'text', 'THIS\nIS\nON\nNEWLINES0\nAHOY\nIS\nON\nNEWLINES1\nIS\nON\nNEWLINES2')
+  UI.setAttribute('techActionCardSummaryText--red', 'height', math.max(98, #techs * 15))
 end
