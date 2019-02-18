@@ -1,21 +1,23 @@
 <Defaults>
-  <Button color='#ffdddd' />
   <Button class='counterButton' fontSize='20' />
   <Panel allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <VerticalLayout allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
-  <Panel class='combatPanel' outline='#912A1F' color='#B5675E' outlineSize='2 2' allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
-  <VerticalLayout class='combatSection' outline='#912A1F' color='#ffffff' padding='6 6 3 3' />
+  <!-- add visibility='Red' to the below when you're ready to expand to player colors -->
+  <Panel class='combatPanel-red' outlineSize='2 2' allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" outline='#912A1F' color='#B5675E'>
+    <Button color='#ffdddd' />
+    <VerticalLayout class='combatSection' outline='#912A1F' color='#ffffff' padding='6 6 3 3' />
+  </Panel>
   <Text class='sectionTitle' fontStyle='Bold' fontSize='16' preferredHeight='25' flexibleHeight='0' />
   <Text class='counterText' fontSize='20' />
   <Text class='unitLabel' fontSize='20' />
   <Row preferredHeight='35' />
 </Defaults>
 
-<Panel class='combatPanel' active='true' padding='3 3 3 3' offsetXY="0 -50" width="150" height="50">
+<Panel class='combatPanel-red' active='true' padding='3 3 3 3' offsetXY="0 -50" width="150" height="50">
   <ToggleButton id="combatTogglePanel__button" text="Show Combat Roller" onValueChanged="toggleCombatRoller" isOn='false' />
 </Panel>
 
-<Panel id='combatPanel' class='combatPanel' active='false' offsetXY='0 -110' width='400' height='80%' flexibleHeight='true'>
+<Panel id='combatPanel' class='combatPanel-red' active='false' offsetXY='0 -110' width='400' height='80%' flexibleHeight='true'>
   <VerticalLayout height='100%' childForceExpandHeight='0' spacing='5'>
 
     <VerticalLayout class='combatSection' preferredHeight='150' flexibleHeight='0' childForceExpandHeight='0'>
@@ -119,7 +121,7 @@
 
     <VerticalLayout class='combatSection' preferredHeight='150' flexibleHeight='0' childForceExpandHeight='0'>
       <Text class='sectionTitle'>SUMMARY</Text>
-      <Text flexibleHeight='1'>(summary here)</Text>
+      <Text flexibleHeight='1' alignment='UpperLeft' resizeTextForBestFit='true' horizontalOverflow='Wrap'>(summary here)  </Text>
     </VerticalLayout>
 
     <Button id="rollButton" text="Roll!" onClick='rollCombatDice' fontSize='18' preferredHeight='50' flexibleHeight='0' fontStyle='Bold' />
