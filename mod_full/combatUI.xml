@@ -1,32 +1,14 @@
-<!--
-  Current implementation plan
-  Each color gets its own panel with visibility set to only their color
-  Script detects cards and modifiers on the drawer and prepares a summary up top
-  The total stack looks something like this then:
-  TECHS & ACTION CARDS (expandable if we can)
-    summary of what is detected
-    prompt on "play cards on your drawer, tech board, or rail to have them detected here"
-    refresh
-  UNITS (w/ reset)
-    | UNITA | UNITB |
-    | - X + | - X + |
-    ...
-  TYPE (Space, Ground, AFB, Bombardment)
-    toggles, each one turns off all others
-  SUMMARY
-    Destroyers (2 rolls at 9+)
-    ...
-  ROLL!
--->
-
 <Defaults>
   <Button color='#ffdddd' />
+  <Button class='counterButton' fontSize='20' />
   <Panel allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <VerticalLayout allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <Panel class='combatPanel' outline='#912A1F' color='#B5675E' outlineSize='2 2' allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <VerticalLayout class='combatSection' outline='#912A1F' color='#ffffff' padding='6 6 3 3' />
   <Text class='sectionTitle' fontStyle='Bold' fontSize='16' preferredHeight='25' flexibleHeight='0' />
-  <Option fontStyle='Bold' />
+  <Text class='counterText' fontSize='20' />
+  <Text class='unitLabel' fontSize='20' />
+  <Row preferredHeight='35' />
 </Defaults>
 
 <Panel class='combatPanel' active='true' padding='3 3 3 3' offsetXY="0 -50" width="150" height="50">
@@ -48,14 +30,81 @@
 
     <VerticalLayout class='combatSection' flexibleHeight='1' childForceExpandHeight='0'>
       <Text class='sectionTitle'>UNITS</Text>
-      <VerticalScrollView flexibleHeight='1' verticalScrollbarVisibility='AutoHide'>
-        <GridLayout spacing='5 5' color='#ffffff' constraint='FixedColumnCount' constraintCount='3' cellSize='120 120'>
-          <Button text='1' />
-          <Button text='2' />
-          <Button text='3' />
-          <Button text='4' />
-        </GridLayout>
-      </VerticalScrollView>
+        <TableLayout columnWidths='70 0 30 40 30'>
+          <Row>
+            <Cell><Image image='unit-infantry' /></Cell>
+            <Cell><Text id='unitLabel--infantry--red' class='unitLabel'>Infantry</Text></Cell>
+            <Cell><Button id='decrementButton--infantry--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--infantry--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--infantry--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-fighter' /></Cell>
+            <Cell><Text id='unitLabel--fighter--red' class='unitLabel'>Fighter</Text></Cell>
+            <Cell><Button id='decrementButton--fighter--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--fighter--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--fighter--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-pds' /></Cell>
+            <Cell><Text id='unitLabel--pds--red' class='unitLabel'>PDS</Text></Cell>
+            <Cell><Button id='decrementButton--pds--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--pds--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--pds--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row id='unitTable_dockRow--red'>
+            <Cell><Image image='unit-dock' /></Cell>
+            <Cell><Text id='unitLabel--dock--red' class='unitLabel'>Space Dock</Text></Cell>
+            <Cell><Button id='decrementButton--dock--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--dock--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--dock--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-carrier' /></Cell>
+            <Cell><Text id='unitLabel--carrier--red' class='unitLabel'>Carrier</Text></Cell>
+            <Cell><Button id='decrementButton--carrier--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--carrier--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--carrier--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-cruiser' /></Cell>
+            <Cell><Text id='unitLabel--cruiser--red' class='unitLabel'>Cruiser</Text></Cell>
+            <Cell><Button id='decrementButton--cruiser--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--cruiser--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--cruiser--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-destroyer' /></Cell>
+            <Cell><Text id='unitLabel--destroyer--red' class='unitLabel'>Destroyer</Text></Cell>
+            <Cell><Button id='decrementButton--destroyer--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--destroyer--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--destroyer--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-dreadnought' /></Cell>
+            <Cell><Text id='unitLabel--dreadnought--red' class='unitLabel'>Dreadnought</Text></Cell>
+            <Cell><Button id='decrementButton--dreadnought--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--dreadnought--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--dreadnought--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row id='unitTable_winnuFlagshipRow--red'>
+            <Cell columnSpan='5'><Text>WINNU FLAGSHIP: Enter # of enemy ships below instead.</Text></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-flagship' /></Cell>
+            <Cell><Text id='unitLabel--flagship--red' class='unitLabel'>Flagship</Text></Cell>
+            <Cell><Button id='decrementButton--flagship--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--flagship--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--flagship--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+          <Row>
+            <Cell><Image image='unit-warsun' /></Cell>
+            <Cell><Text id='unitLabel--warsun--red' class='unitLabel'>War Sun</Text></Cell>
+            <Cell><Button id='decrementButton--warsun--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
+            <Cell><Text id='unitCount--warsun--red' class='counterText'>0</Text></Cell>
+            <Cell><Button id='incrementButton--warsun--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+          </Row>
+        </TableLayout>
     </VerticalLayout>
 
     <VerticalLayout class='combatSection' preferredHeight='60' flexibleHeight='0' childForceExpandHeight='0'>
