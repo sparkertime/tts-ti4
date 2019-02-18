@@ -49,7 +49,7 @@
     <VerticalLayout class='combatSection' flexibleHeight='1' childForceExpandHeight='0'>
       <Text class='sectionTitle'>UNITS</Text>
       <VerticalScrollView flexibleHeight='1' verticalScrollbarVisibility='AutoHide'>
-        <GridLayout spacing='5 5' constraint='FixedColumnCount' cellSize='190 190' childAlignment='UpperCenter'>
+        <GridLayout spacing='5 5' color='#ffffff' constraint='FixedColumnCount' constraintCount='3' cellSize='120 120'>
           <Button text='1' />
           <Button text='2' />
           <Button text='3' />
@@ -68,7 +68,7 @@
       </Dropdown>
     </VerticalLayout>
 
-    <VerticalLayout class='combatSection' preferredHeight='100' flexibleHeight='0' childForceExpandHeight='0'>
+    <VerticalLayout class='combatSection' preferredHeight='150' flexibleHeight='0' childForceExpandHeight='0'>
       <Text class='sectionTitle'>SUMMARY</Text>
       <Text flexibleHeight='1'>(summary here)</Text>
     </VerticalLayout>
