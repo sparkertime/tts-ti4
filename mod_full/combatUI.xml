@@ -108,15 +108,24 @@
         </TableLayout>
     </VerticalLayout>
 
-    <VerticalLayout class='combatSection' preferredHeight='60' flexibleHeight='0' childForceExpandHeight='0'>
-      <Text class='sectionTitle'>ROLL TYPE</Text>
-      <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
-        <Option selected="true">Combat</Option>
-        <Option>Space Cannon</Option>
-        <Option>Bombardment</Option>
-        <Option>Anti-Fighter Barrage</Option>
-      </Dropdown>
-    </VerticalLayout>
+    <HorizontalLayout preferredHeight='60' flexibleHeight='0'>
+      <VerticalLayout class='combatSection'>
+        <Text class='sectionTitle'>ROLL TYPE</Text>
+        <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
+          <Option selected="true">Combat</Option>
+          <Option>Space Cannon</Option>
+          <Option>Bombardment</Option>
+          <Option>Anti-Fighter Barrage</Option>
+        </Dropdown>
+      </VerticalLayout>
+      <VerticalLayout class='combatSection'>
+        <Text class='sectionTitle'>TARGET</Text>
+        <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
+          <Option selected="true">(pick a faction)</Option>
+          <Option>Universities of Jol-Nar</Option>
+        </Dropdown>
+      </VerticalLayout>
+    </HorizontalLayout>
 
     <VerticalLayout class='combatSection' preferredHeight='150' flexibleHeight='0' childForceExpandHeight='0'>
       <Text class='sectionTitle'>SUMMARY</Text>
