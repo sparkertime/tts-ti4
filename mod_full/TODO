@@ -1,5 +1,10 @@
 * Finish the die roller
   * Scan for cards & summarize
+  * Optional Abilities - Plasma Scoring (+1 die on best cannon), Nebula Defense (the defender applies +1 to the combat rolls of his ships during that combat.)
+  * Flagship Abilities
+    - Sardakk applies a modifier when present
+    - JolNar doubles hits on 9's and 10's
+    - Winnu displays that note in the UI
   * Update summary anytime the unit count, roll type, or tech/action summary changes
   * Roll & announce results
   * Add reset button

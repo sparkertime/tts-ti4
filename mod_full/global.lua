@@ -14,97 +14,205 @@ DRAWERS = {
 }
 
 TECHS = {
-  {name = 'Fighter II', bonuses = {
-    fighter = { combat = 8 }
+  {
+    name = 'Fighter II',
+    fighter = {combat = {shots = 1, value = 8}}
+  },
+  {
+    name = 'Infantry II'
+    infantry = {combat = {shots = 1, value = 7}}
+  },
+  {
+    name = 'PDS II',
+    pds = {cannon = {shots = 1, value = 5}}
   }},
-  {name = 'Infantry II', bonuses = {
-    infantry = { combat = 7 }
+  {
+    name = 'Destroyer II',
+    destroyer = {
+      combat = {shots = 1, value = 8},
+      barrage = {shots = 3, value = 6}
+    }
   }},
-  { name = 'PDS II', bonuses = {
-    pds = { cannon = 5 }
-  }},
-  {name = 'Destroyer II', bonuses = {
-    destroyer = { combat = 8, barrage = {shots = 3, value = 6} }
-  }},
-  {name = 'Cruiser II', bonuses = {
-    cruiser = { combat = 6 }
-  }},
-  {name = 'Super-Dreadnought II', bonuses = {
-    dreadnought = { bombard = 4, combat = 4 }
-  }},
-  {name = 'Hybrid Crystal Fighter II', bonuses = {
-    fighter = { combat = 7 }
-  }},
-  {name = 'Exotrireme II', bonuses = {
-    dreadnought = { bombard = {value = 4, shots = 2}, combat = 5 }
-  }},
+  {
+    name = 'Cruiser II',
+    cruiser = {combat = {shots = 1, value = 6}}
+  },
+  {
+    name = 'Super-Dreadnought II',
+    dreadnought = {
+      bombard = {shots = 1, value = 4},
+      combat = {shots = 1, value = 4}
+    }
+  },
+  {
+    name = 'Hybrid Crystal Fighter II',
+    fighter = {combat = {shots = 1, value=7}}
+  },
+  {
+    name = 'Exotrireme II',
+    dreadnought = {
+      bombard = {value = 4, shots = 2},
+      combat = {shots = 1, value = 5}
+    }
+  },
+  {name = 'Plasma Scoring', enablePlasmaScoring = true}
 }
 
 FACTIONS = {}
-FACTIONS['The Arborec'] = {
+FACTIONS['Arborec'] = {
   units = {
-    warsun = {
+    infantry = {
       name = 'Letani Warrior'
+    },
+    flagship = {
+      combat = {shots = 2, value = 7}
     }
   }
 }
-FACTIONS['The Clan of Saar'] = {
+FACTIONS['Barony of Letnev'] = {
   units = {
-    warsun = {
-      name = 'Letani Warrior'
-    },
-    dock = {name = 'Floating Factory'},
+    flagship = {
+      combat = {shots = 2, value = 5},
+      bombard = {shots = 3, value = 5}
+    }
   }
 }
-FACTIONS['The Embers of Muaat'] = {
+FACTIONS['Clan of Saar'] = {
+  units = {
+    dock = {name = 'Floating Factory'},
+    flagship = {
+      combat = {shots = 2, value = 5},
+      barrage = {shots = 4, value = 6}
+    }
+  }
+}
+FACTIONS['Embers of Muaat'] = {
   units = {
     warsun = {
       name = 'Prototype War Sun'
+    },
+    flagship = {
+      combat = {shots = 2, value = 5}
     }
   }
 }
-FACTIONS['The Federation of Sol'] = {
+FACTIONS['Emirates of Hacan'] = {
+  units = {
+    flagship = {
+      combat = {shots = 2, value = 7}
+    }
+  }
+}
+FACTIONS['Federation of Sol'] = {
   units = {
     infantry = {
       name = 'Spec Ops',
-      combat = 7
+      combat = {value = 7}
     },
-    carrier = {name = 'Advanced Carrier'}
+    carrier = {name = 'Advanced Carrier'},
+    flagship = {
+      combat = {shots = 2, value = 5}
+    }
   }
 }
-FACTIONS['The L1z1x Mindnet'] = {
+FACTIONS['Ghosts of Creuss'] = {
+  units = {
+    flagship = {
+      combat = {shots = 1, value = 5}
+    }
+  }
+}
+FACTIONS['L1z1x Mindnet'] = {
   units = {
     dreadnought = {
       name = 'Super-Dreadnought'
+    },
+    flagship = {
+      combat = {shots = 2, value = 5}
     }
   }
 }
-FACTIONS['The Naalu Collective'] = {
+FACTIONS['Mentak Coalition'] = {
+  units = {
+    flagship = {
+      combat = {shots = 2, value = 7}
+    }
+  }
+}
+FACTIONS['Naalu Collective'] = {
   units = {
     fighter = {
       name = 'Hybrid Crystal Fighter',
-      combat = 8,
+      combat = {value = 8},
+    },
+    flagship = {
+      combat = {shots = 2, value = 9}
     }
   }
 }
-FACTIONS['The Sardakk N\'orr'] = {
+FACTIONS['Nekro Virus'] = {
+  units = {
+    flagship = {
+      combat = {shots = 2, value = 9}
+    }
+  }
+}
+FACTIONS['Sardakk N\'orr'] = {
   units = {
     dreadnought = {
       name = 'Exotrireme',
-      combat = 5,
+      combat = {value = 5},
       bombard = {shots = 2, value = 4}
+    },
+    flagship = {
+      combat = {shots = 2, value = 6},
+      modifier = {
+        fighter = {combat = {value = 1}},
+        carrier = {combat = {value = 1}},
+        cruiser = {combat = {value = 1}},
+        destroyer = {combat = {value = 1}},
+        dreadnought = {combat = {value = 1}},
+        warsun = {combat = {value = 1}},
+      }
     }
-  },
-  modifiers = {{
-    name = 'Unrelenting',
-    all = {combat = 1}
-  }}
+  }
 }
-FACTIONS['The Universities of Jol-Nar'] = {
-  modifiers = {{
-    name = 'Fragile',
-    all = {combat = -1}
-  }}
+FACTIONS['Universities of Jol-Nar'] = {
+  units = {
+    flagship = {
+      combat = {shots = 2, value = 6},
+      doubleHits = true
+    }
+  }
+}
+FACTIONS['Winnu'] = {
+  units = {
+    flagship = {
+      combat = {shots = 1, value = 7}, -- Actual # of shots determined in the UI
+    }
+  }
+}
+FACTIONS['Xxcha Kingdom'] = {
+  units = {
+    flagship = {
+      combat = {shots = 2, value = 7},
+      cannon = {shots = 3, value = 5},
+    }
+  }
+}
+FACTIONS['Yin Brotherhood'] = {
+  units = {
+    flagship = {
+      combat = {shots = 2, value = 9},
+    }
+  }
+}
+FACTIONS['Yssaril Tribes'] = {
+  units = {
+    flagship = {
+      combat = {shots = 2, value = 5},
+    }
+  }
 }
 
 BASE_UNITS = {
@@ -131,33 +239,68 @@ BASE_UNITS = {
   cruiser = {
     combat = {shots = 1, value = 7}
   },
-  cruiser = {
-    combat = {shots = 1, value = 7}
-  },
   warsun = {
     combat = {shots = 3, value = 3},
     barrage = {shots = 3, value = 3}
   },
-  dock = {}
+  flagship = {},
+  dock = {hidden = true}
 }
 
-CARDS = {}
-CARDS['Prophecy of Ixth'] = {
-  modifiers = {{fighter = {combat = 1}}}
+MODIFIERS = {
+  {
+    name = 'Fragile [Jol-Nar]',
+    objName = 'The Universities of Jol-Nar Sheet',
+    all = {combat = {value = -1}}
+  },
+  {
+    name = 'Unrelenting [Sardakk N\'orr]',
+    objName = 'The Sardakk N\'orr Sheet',
+    all = {combat = {value = 1}}
+  },
+  {
+    name = 'Prophecy of Ixth [Agenda]',
+    objName = 'Prophecy of Ixth',
+    fighter = {combat = {value = 1}}
+  },
+  {
+    name = 'Bunker [AC]',
+    objName = 'Bunker',
+    penalty = {
+      all = {bombard = {value = -4}}
+    }
+  },
+  {
+    name = 'Experimental Battlestation [AC]',
+    objName = 'Experimental Battlestation',
+    dock = {
+      hidden = false,
+      cannon = {value = 5, shots = 3}
+    }
+  },
+  {
+    name = 'Fighter Prototype [AC]',
+    objName = 'Fighter Prototype',
+    fighter = {combat = {value = 2}}
+  },
+  {
+    name = 'Morale Boost [AC]',
+    objName = 'Morale Boost',
+    all = {combat = {value = 1}}
+  },
+  {
+    name = 'Tekklar Legion [PN]',
+    objName = 'Tekklar Legion',
+    all = {combat = {value = 1}},
+    penalty = {combat = {value = -1}},
+    penaltyFaction = 'Sardakk N\'orr'
+  },
+  {
+    name = 'Antimass Deflectors [Tech]',
+    objName = 'Antimass Deflectors',
+    penalty = {cannon = {value = -1}},
+  },
 }
-CARDS['Bunker'] = {
-  penalties = {{all = {bombard = -4}}}
-}
-CARDS['Experimental Battlestation'] = {
-  units = {}
-}
-CARDS['Fighter Prototype'] = {}
-CARDS['Morale Boost'] = {}
-CARDS['Tekklar Legion'] = {
-  type = 'promissary'
-}
-CARDS['Antimass Deflectors'] = {}
--- need to do _Something_ with nebula defence
 
 function colorFromId(elementId)
   local _, _, color = string.find(elementId, "--(.+)$")
@@ -202,7 +345,12 @@ end
 
 function refreshCombatModifiers(_, _, elementId)
   for _, obj in pairs(getAllObjects()) do
-
+    -- collect factions, techs & cards
+    -- calculate base stats for all ships based on techs
+    -- build initial pool based on numbers in UI
+    -- apply card modifiers (incl. those based on target)
+    -- apply nebula and plasma scoring
+    -- summarize and cache for roll
   end
   techs = {'Tech1', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4'}
   UI.setAttribute('techActionCardSummaryText--red', 'text', 'THIS\nIS\nON\nNEWLINES0\nAHOY\nIS\nON\nNEWLINES1\nIS\nON\nNEWLINES2')

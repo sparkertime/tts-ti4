@@ -55,7 +55,7 @@
           </Row>
           <Row id='unitTable_dockRow--red'>
             <Cell><Image image='unit-dock' /></Cell>
-            <Cell><Text id='unitLabel--dock--red' class='unitLabel'>Space Dock</Text></Cell>
+            <Cell><Text id='unitLabel--dock--red' class='unitLabel'>Experimental Battlestation</Text></Cell>
             <Cell><Button id='decrementButton--dock--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
             <Cell><Text id='unitCount--dock--red' class='counterText'>0</Text></Cell>
             <Cell><Button id='incrementButton--dock--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
