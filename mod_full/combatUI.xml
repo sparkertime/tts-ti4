@@ -26,7 +26,7 @@
       <VerticalScrollView preferredHeight='105' flexibleHeight='1' verticalScrollbarVisibility='AutoHide'>
         <Text id='techActionCardSummaryText--red' class='techActionCardSummaryText' height='98' alignment='UpperLeft' horizontalOverflow='Wrap'>(summary here)</Text>
       </VerticalScrollView>
-      <Button id="refreshButton" text="Refresh" onClick='refreshCombatModifiers' preferredHeight='20' flexibleHeight='0' />
+      <Button id="refreshButton--red" text="Refresh" onClick='refreshCombatModifiers(red)' preferredHeight='20' flexibleHeight='0' />
     </VerticalLayout>
 
     <VerticalLayout class='combatSection' flexibleHeight='1' childForceExpandHeight='0'>
