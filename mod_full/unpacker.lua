@@ -15,7 +15,7 @@ OWNER_TOKENS = {
     {x = -73, z = -14},
     {x = -71, z = -14},
   },
-  tokenRotation = 180,
+  tokenRotation = 90,
   objectiveStartY = 1.8,
   objectiveYIncrement = 0.15
 }
@@ -26,7 +26,6 @@ DRAWERS = {
     color = 'Yellow',
     sheetGuid = 'e360cd',
     reverse = true,
-    homeTilePosition = {x = 22.50, y = 0.73, z = -19.49},
     xMin = 21, xMax = 51, zMin = -64.5, zMax = -24
   },
   {
@@ -34,7 +33,6 @@ DRAWERS = {
     color = 'Red',
     sheetGuid = '949b21',
     reverse = true,
-    homeTilePosition = {x = -11.25, y = 0.73, z = -19.49},
     xMin = -15, xMax = 15, zMin = -64.5, zMax = -24
   },
   {
@@ -42,28 +40,24 @@ DRAWERS = {
     color = 'Green',
     sheetGuid = '50e72a',
     reverse = true,
-    homeTilePosition = {x = -33.75, y = 0.73, z = -19.49},
     xMin = -51, xMax = -21, zMin = -64.5, zMax = -24
   },
   {
     playerNumber = 4,
     color = 'Purple',
     sheetGuid = 'edf9b1',
-    homeTilePosition = {x = 33.75, y = 0.73, z = 19.49},
     xMin = 21, xMax = 51, zMin = 24, zMax = 64.5
   },
   {
     playerNumber = 5,
     color = 'Blue',
     sheetGuid = '0dde42',
-    homeTilePosition = {x = 11.25, y = 0.73, z = 19.49},
     xMin = -15, xMax = 15, zMin = 24, zMax = 64.5
   },
   {
     playerNumber = 6,
     color = 'White',
     sheetGuid = 'ef5188',
-    homeTilePosition = {x = -22.50, y = 0.73, z = 19.49},
     xMin = -51, xMax = -21, zMin = 24, zMax = 64.5
   },
 }
@@ -437,7 +431,6 @@ function findDrawerForObject(obj)
     playerNumber = drawer.playerNumber,
     sheet = sheet,
     sheetPosition = sheet.getPosition(),
-    homeTilePosition = drawer.homeTilePosition,
     bounds = {
       xMin = drawer.xMin,
       xMax = drawer.xMax,
@@ -671,9 +664,9 @@ function placeInitialOwnerTokens(drawer, obj)
   end
 end
 
-TECH_CARD_OFFSET_1 = {x = 16.45, z = 6.67}
-TECH_CARD_OFFSET_2 = {x = 13.15, z = 6.67}
-TECH_CARD_Y = -0.95
+TECH_CARD_OFFSET_1 = {x = 16.45, z = 6.35}
+TECH_CARD_OFFSET_2 = {x = 13.15, z = 6.35}
+TECH_CARD_Y = -0.73
 
 function placeTechCards(player, bag)
   local factionTechObjects = {}
@@ -706,10 +699,10 @@ end
 
 STARTING_TECH = {
   placementOffsets = {
-    {x = 3.3, y = 0.05, z = 6.7},
-    {x = -0.1, y = 0.05, z = 6.7},
-    {x = 3.3, y = 0.05, z = 9},
-    {x = -0.1, y = 0.05, z = 9},
+    {x = 3.3, y = 0.27, z = 6.7},
+    {x = -0.1, y = 0.27, z = 6.7},
+    {x = 3.3, y = 0.27, z = 9},
+    {x = -0.1, y = 0.27, z = 9},
   },
   -- this is every non-faction starting tech in FACTIONS above.
   techNames = {
@@ -807,26 +800,25 @@ function renameUnit(unit, player, name)
   unit.setName(player.color .. " " .. name)
 end
 
+TILE_OFFSETS = {
+  home = {x = 0, y = 2.75, z = -16.9},
+  gate = {
+    offsetX = 7,
+    homeTileRotationFix = 110, -- fix the ghosts home tile rotation (the model is off by 110)
+  }
+}
+
 function unpackHomeSystem(player)
   player.factionBox.takeObject({
     guid = player.factionBoxGuids.homeTileGuid,
     smooth = true,
-    position = {
-      x = player.drawer.homeTilePosition.x,
-      y = player.drawer.homeTilePosition.y + 0.5,
-      z = player.drawer.homeTilePosition.z
-    },
+    position = positionFromSheet(player.drawer.sheetPosition, TILE_OFFSETS.home, player.drawer.reverse),
     rotation = { x = 0, y = player.drawer.reverse and 180 or 0, z = 0 },
     callback_function = function(obj)
       setupHomeSystem(player, obj)
     end
   })
 end
-
-GATE_SETUP = {
-  offsetX = -11.25,
-  homeTileRotationFix = 110 -- fix the ghosts home tile rotation (the model is off by 110)
-}
 
 function unpackGate(player, homeTile)
   if not player.factionBoxGuids.gateTileGuid then
@@ -836,7 +828,7 @@ function unpackGate(player, homeTile)
   local homeTileRotation = homeTile.getRotation()
   homeTile.setRotation({
     x = homeTileRotation.x,
-    y = homeTileRotation.y + GATE_SETUP.homeTileRotationFix,
+    y = homeTileRotation.y + TILE_OFFSETS.gate.homeTileRotationFix,
     z = homeTileRotation.z
   })
 
@@ -845,7 +837,7 @@ function unpackGate(player, homeTile)
     guid = player.factionBoxGuids.gateTileGuid,
     smooth = true,
     position = {
-      x = homeTilePosition.x + (player.drawer.reverse and -1 or 1) * GATE_SETUP.offsetX,
+      x = homeTilePosition.x + (player.drawer.reverse and -1 or 1) * TILE_OFFSETS.gate.offsetX,
       y = homeTilePosition.y,
       z = homeTilePosition.z
     },
