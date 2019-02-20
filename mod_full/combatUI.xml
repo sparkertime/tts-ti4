@@ -89,7 +89,7 @@
             <Cell><Text id='unitCount--dreadnought--red' class='counterText'>0</Text></Cell>
             <Cell><Button id='incrementButton--dreadnought--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
           </Row>
-          <Row id='unitTable_winnuFlagshipRow--red'>
+          <Row id='winnuFlagshipNote--red'>
             <Cell columnSpan='5'><Text>WINNU FLAGSHIP: Enter # of enemy ships below instead.</Text></Cell>
           </Row>
           <Row>
@@ -110,24 +110,29 @@
     </VerticalLayout>
 
     <HorizontalLayout preferredHeight='140' flexibleHeight='0' childForceExpandWidth='0'>
-      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='0' preferredWidth='250' childForceExpandHeight='0'>
+      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='0' preferredWidth='200' childForceExpandHeight='0'>
         <Text class='sectionTitle'>ROLL TYPE</Text>
-        <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
+        <Dropdown onValueChanged="optionSelected" flexibleHeight='0' preferredHeight='30'>
           <Option selected="true">Combat</Option>
           <Option>Space Cannon</Option>
           <Option>Bombardment</Option>
           <Option>Anti-Fighter Barrage</Option>
         </Dropdown>
-        <Text class='sectionTitle'>TARGET</Text>
-        <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
-          <Option selected="true">(pick a faction)</Option>
-          <Option>Universities of Jol-Nar</Option>
-        </Dropdown>
-      </VerticalLayout>
-      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='1' childForceExpandHeight='0'>
         <Text class='sectionTitle'>OPTIONS</Text>
         <Toggle flexibleHeight='1'>Defending Nebula?</Toggle>
-        <Toggle isOn="true" flexibleHeight='1'>Use Plasma Scoring?</Toggle>
+        <Toggle id='plasmaScoringSelection--red' isOn="true" flexibleHeight='1'>Use Plasma Scoring?</Toggle>
+      </VerticalLayout>
+      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='1' childForceExpandHeight='0'>
+        <Text class='sectionTitle'>TARGET</Text>
+        <ToggleGroup>
+          <VerticalLayout>
+            <Toggle id='opponentOption1--red'>(nameo)</Toggle>
+            <Toggle id='opponentOption2--red'>(name)</Toggle>
+            <Toggle id='opponentOption3--red'>(name)</Toggle>
+            <Toggle id='opponentOption4--red'>(name)</Toggle>
+            <Toggle id='opponentOption5--red'>(name)</Toggle>
+          </VerticalLayout>
+        </ToggleGroup>
       </VerticalLayout>
     </HorizontalLayout>
 

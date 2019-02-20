@@ -52,41 +52,59 @@ DRAWERS = {
 TECHS = {
   {
     name = 'Fighter II',
-    fighter = {combat = {shots = 1, value = 8}}
+    fighter = {
+      name = 'Fighter II',
+      combat = {shots = 1, value = 8}
+    }
   },
   {
     name = 'Infantry II',
-    infantry = {combat = {shots = 1, value = 7}}
+    infantry = {
+      name = 'Infantry II',
+      combat = {shots = 1, value = 7}
+    }
   },
   {
     name = 'PDS II',
-    pds = {cannon = {shots = 1, value = 5}}
+    pds = {
+      name = 'PDS II',
+      cannon = {shots = 1, value = 5}
+    }
   },
   {
     name = 'Destroyer II',
     destroyer = {
+      name = 'Destroyer II',
       combat = {shots = 1, value = 8},
       barrage = {shots = 3, value = 6}
     }
   },
   {
     name = 'Cruiser II',
-    cruiser = {combat = {shots = 1, value = 6}}
+    cruiser = {
+      name = 'Cruiser II',
+      combat = {shots = 1, value = 6}
+    }
   },
   {
     name = 'Super-Dreadnought II',
     dreadnought = {
+      name = 'Super-Dreadnought II',
       bombard = {shots = 1, value = 4},
       combat = {shots = 1, value = 4}
     }
   },
   {
     name = 'Hybrid Crystal Fighter II',
-    fighter = {combat = {shots = 1, value=7}}
+    fighter = {
+      name = 'Hybrid Crystal Fighter II',
+      combat = {shots = 1, value=7}
+    }
   },
   {
     name = 'Exotrireme II',
     dreadnought = {
+      name = 'Exotrireme II',
       bombard = {value = 4, shots = 2},
       combat = {shots = 1, value = 5}
     }
@@ -94,193 +112,169 @@ TECHS = {
   {name = 'Plasma Scoring', enablePlasmaScoring = true}
 }
 
-FACTIONS = {}
-FACTIONS['Arborec'] = {
-  units = {
-    infantry = {
-      name = 'Letani Warrior'
-    },
-    flagship = {
-      combat = {shots = 2, value = 7}
+FACTION_UNITS = {}
+FACTION_UNITS['Arborec'] = {
+  infantry = {
+    name = 'Letani Warrior'
+  },
+  flagship = {
+    combat = {shots = 2, value = 7}
+  }
+}
+FACTION_UNITS['Barony of Letnev'] = {
+  flagship = {
+    combat = {shots = 2, value = 5},
+    bombard = {shots = 3, value = 5}
+  }
+}
+FACTION_UNITS['Clan of Saar'] = {
+  dock = {name = 'Floating Factory'},
+  flagship = {
+    combat = {shots = 2, value = 5},
+    barrage = {shots = 4, value = 6}
+  }
+}
+FACTION_UNITS['Embers of Muaat'] = {
+  warsun = {
+    name = 'Prototype War Sun'
+  },
+  flagship = {
+    combat = {shots = 2, value = 5}
+  }
+}
+FACTION_UNITS['Emirates of Hacan'] = {
+  flagship = {
+    combat = {shots = 2, value = 7}
+  }
+}
+FACTION_UNITS['Federation of Sol'] = {
+  infantry = {
+    name = 'Spec Ops',
+    combat = {value = 7}
+  },
+  carrier = {name = 'Advanced Carrier'},
+  flagship = {
+    combat = {shots = 2, value = 5}
+  }
+}
+FACTION_UNITS['Ghosts of Creuss'] = {
+  flagship = {
+    combat = {shots = 1, value = 5}
+  }
+}
+FACTION_UNITS['L1z1x Mindnet'] = {
+  dreadnought = {
+    name = 'Super-Dreadnought'
+  },
+  flagship = {
+    combat = {shots = 2, value = 5}
+  }
+}
+FACTION_UNITS['Mentak Coalition'] = {
+  flagship = {
+    combat = {shots = 2, value = 7}
+  }
+}
+FACTION_UNITS['Naalu Collective'] = {
+  fighter = {
+    name = 'Hybrid Crystal Fighter',
+    combat = {value = 8},
+  },
+  flagship = {
+    combat = {shots = 2, value = 9}
+  }
+}
+FACTION_UNITS['Nekro Virus'] = {
+  flagship = {
+    combat = {shots = 2, value = 9}
+  }
+}
+FACTION_UNITS['Sardakk N\'orr'] = {
+  dreadnought = {
+    name = 'Exotrireme',
+    combat = {value = 5},
+    bombard = {shots = 2, value = 4}
+  },
+  flagship = {
+    combat = {shots = 2, value = 6},
+    bonus = {
+      fighter = {combat = {value = 1}},
+      carrier = {combat = {value = 1}},
+      cruiser = {combat = {value = 1}},
+      destroyer = {combat = {value = 1}},
+      dreadnought = {combat = {value = 1}},
+      warsun = {combat = {value = 1}},
     }
   }
 }
-FACTIONS['Barony of Letnev'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 5},
-      bombard = {shots = 3, value = 5}
-    }
+FACTION_UNITS['Universities of Jol-Nar'] = {
+  flagship = {
+    combat = {shots = 2, value = 6},
+    doubleHits = true
   }
 }
-FACTIONS['Clan of Saar'] = {
-  units = {
-    dock = {name = 'Floating Factory'},
-    flagship = {
-      combat = {shots = 2, value = 5},
-      barrage = {shots = 4, value = 6}
-    }
+FACTION_UNITS['Winnu'] = {
+  flagship = {
+    displayWinnuNote = true,
+    combat = {shots = 1, value = 7}, -- Actual # of shots determined in the UI
   }
 }
-FACTIONS['Embers of Muaat'] = {
-  units = {
-    warsun = {
-      name = 'Prototype War Sun'
-    },
-    flagship = {
-      combat = {shots = 2, value = 5}
-    }
+FACTION_UNITS['Xxcha Kingdom'] = {
+  flagship = {
+    combat = {shots = 2, value = 7},
+    cannon = {shots = 3, value = 5},
   }
 }
-FACTIONS['Emirates of Hacan'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 7}
-    }
+FACTION_UNITS['Yin Brotherhood'] = {
+  flagship = {
+    combat = {shots = 2, value = 9},
   }
 }
-FACTIONS['Federation of Sol'] = {
-  units = {
-    infantry = {
-      name = 'Spec Ops',
-      combat = {value = 7}
-    },
-    carrier = {name = 'Advanced Carrier'},
-    flagship = {
-      combat = {shots = 2, value = 5}
-    }
-  }
-}
-FACTIONS['Ghosts of Creuss'] = {
-  units = {
-    flagship = {
-      combat = {shots = 1, value = 5}
-    }
-  }
-}
-FACTIONS['L1z1x Mindnet'] = {
-  units = {
-    dreadnought = {
-      name = 'Super-Dreadnought'
-    },
-    flagship = {
-      combat = {shots = 2, value = 5}
-    }
-  }
-}
-FACTIONS['Mentak Coalition'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 7}
-    }
-  }
-}
-FACTIONS['Naalu Collective'] = {
-  units = {
-    fighter = {
-      name = 'Hybrid Crystal Fighter',
-      combat = {value = 8},
-    },
-    flagship = {
-      combat = {shots = 2, value = 9}
-    }
-  }
-}
-FACTIONS['Nekro Virus'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 9}
-    }
-  }
-}
-FACTIONS['Sardakk N\'orr'] = {
-  units = {
-    dreadnought = {
-      name = 'Exotrireme',
-      combat = {value = 5},
-      bombard = {shots = 2, value = 4}
-    },
-    flagship = {
-      combat = {shots = 2, value = 6},
-      bonus = {
-        fighter = {combat = {value = 1}},
-        carrier = {combat = {value = 1}},
-        cruiser = {combat = {value = 1}},
-        destroyer = {combat = {value = 1}},
-        dreadnought = {combat = {value = 1}},
-        warsun = {combat = {value = 1}},
-      }
-    }
-  }
-}
-FACTIONS['Universities of Jol-Nar'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 6},
-      doubleHits = true
-    }
-  }
-}
-FACTIONS['Winnu'] = {
-  units = {
-    flagship = {
-      displayWinnuNote = true,
-      combat = {shots = 1, value = 7}, -- Actual # of shots determined in the UI
-    }
-  }
-}
-FACTIONS['Xxcha Kingdom'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 7},
-      cannon = {shots = 3, value = 5},
-    }
-  }
-}
-FACTIONS['Yin Brotherhood'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 9},
-    }
-  }
-}
-FACTIONS['Yssaril Tribes'] = {
-  units = {
-    flagship = {
-      combat = {shots = 2, value = 5},
-    }
+FACTION_UNITS['Yssaril Tribes'] = {
+  flagship = {
+    combat = {shots = 2, value = 5},
   }
 }
 
+UNIT_KEYS = {'fighter', 'infantry', 'carrier', 'dreadnought', 'destroyer', 'pds', 'cruiser', 'warsun', 'flagship', 'dock'}
+
 BASE_UNITS = {
   fighter = {
+    name = 'Fighter',
     combat = {shots = 1, value = 9}
   },
   infantry = {
+    name = 'Infantry',
     combat = {shots = 1, value = 8}
   },
   carrier = {
+    name = 'Carrier',
     combat = {shots = 1, value = 9}
   },
   dreadnought = {
+    name = 'Dreadnought',
     combat = {shots = 1, value = 5},
     bombard = {shots = 1, value = 5}
   },
   destroyer = {
+    name = 'Destroyer',
     combat = {shots = 1, value = 9},
     barrage = {shots = 2, value = 9}
   },
   pds = {
+    name = 'PDS',
     cannon = {shots = 1, value = 6}
   },
   cruiser = {
+    name = 'Cruiser',
     combat = {shots = 1, value = 7}
   },
   warsun = {
+    name = 'War Sun',
     combat = {shots = 3, value = 3},
     barrage = {shots = 3, value = 3}
   },
-  flagship = {},
+  flagship = {name = 'Flagship'},
   dock = {hidden = true}
 }
 
@@ -355,21 +349,21 @@ function toggleCombatRoller(player, isOn, element)
 end
 
 function refreshCombatModifiers(_, _, elementId)
-  local factions = collectFactions()
-    -- collect factions, techs & cards
-    -- calculate base stats for all ships based on techs
+  local players = collectPlayers()
+  addUnitStats(players)
+  updateDisplayForPlayers(players)
+    -- set displays based on faction and stats
     -- build initial pool based on numbers in UI
     -- apply card modifiers (incl. those based on target)
     -- apply nebula and plasma scoring
     -- summarize and cache for roll
-  techs = {'Tech1', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4'}
-  UI.setAttribute('techActionCardSummaryText--red', 'text', 'THIS\nIS\nON\nNEWLINES0\nAHOY\nIS\nON\nNEWLINES1\nIS\nON\nNEWLINES2')
-  UI.setAttribute('techActionCardSummaryText--red', 'height', math.max(98, #techs * 15))
+  --UI.setAttribute('techActionCardSummaryText--red', 'height', math.max(98, #techs * 15))
 end
 
-function collectFactions()
-  local factions = {}
+function collectPlayers()
+  local players = {}
   local modifiersByColor = {}
+  local techsByColor = {}
 
   for _, obj in pairs(getAllObjects()) do
     local drawerColor = getDrawerColor(obj)
@@ -377,9 +371,10 @@ function collectFactions()
       local objName = obj.getName()
       local factionName = getFactionName(objName)
       if factionName then
-        factions[factionName] = {
+        players[factionName] = {
           factionName = factionName,
-          color = drawerColor
+          color = drawerColor,
+          enablePlasmaScoring = false,
         }
       end
       for _, modifier in pairs(MODIFIERS) do
@@ -388,21 +383,28 @@ function collectFactions()
           table.insert(modifiersByColor[drawerColor], modifier)
         end
       end
+      for _, tech in pairs(TECHS) do
+        if tech.name == objName then
+          techsByColor[drawerColor] = techsByColor[drawerColor] or {}
+          table.insert(techsByColor[drawerColor], tech)
+        end
+      end
     end
   end
 
-  for _, faction in pairs(factions) do
-    faction.modifiers = modifiersByColor[faction.color]
+  for _, player in pairs(players) do
+    player.modifiers = modifiersByColor[player.color] or {}
+    player.techs = techsByColor[player.color] or {}
   end
 
-  return factions
+  return players
 end
 
 function getDrawerColor(obj)
   local position = obj.getPosition()
 
   for _, drawer in ipairs(DRAWERS) do
-    for _, area in drawer.areas do
+    for _, area in pairs(drawer.areas) do
       if position.x >= area.xMin and position.x <= area.xMax and position.z >= area.zMin and position.z <= area.zMax then
         return drawer.color
       end
@@ -413,9 +415,96 @@ function getDrawerColor(obj)
 end
 
 function getFactionName(objName)
-  local _, _, factionName = string.find(token.getName(), "The (.+) Sheet$")
+  local _, _, factionName = string.find(objName, "The (.+) Sheet$")
   return factionName
 end
+
+function addUnitStats(players)
+  for _, player in pairs(players) do
+    player.units = {}
+    for unitKey, unit in pairs(BASE_UNITS) do
+      player.units[unitKey] = mergeUnit({}, unit)
+    end
+
+    for unitKey, factionUnit in pairs(FACTION_UNITS[player.factionName]) do
+      player.units[unitKey] = mergeUnit(player.units[unitKey], factionUnit)
+    end
+
+    for _, tech in pairs(player.techs) do
+      player.enablePlasmaScoring = player.enablePlasmaScoring or tech.enablePlasmaScoring
+      for _, unitKey in pairs(UNIT_KEYS) do
+        if tech[unitKey] then
+          player.units[unitKey] = mergeUnit(player.units[unitKey], tech[unitKey])
+        end
+      end
+    end
+  end
+end
+
+function mergeUnit(current, new)
+  return {
+    name = new.name or current.name,
+    hidden = new.hidden or current.hidden,
+    combat = {
+      shots = (new.combat and new.combat.shots) or (current.combat and current.combat.shots) or 0,
+      value = (new.combat and new.combat.value) or (current.combat and current.combat.value) or 0,
+    },
+    bombard = {
+      shots = (new.bombard and new.bombard.shots) or (current.bombard and current.bombard.shots) or 0,
+      value = (new.bombard and new.bombard.value) or (current.bombard and current.bombard.value) or 0,
+    },
+    barrage = {
+      shots = (new.barrage and new.barrage.shots) or (current.barrage and current.barrage.shots) or 0,
+      value = (new.barrage and new.barrage.value) or (current.barrage and current.barrage.value) or 0,
+    },
+    cannon = {
+      shots = (new.cannon and new.cannon.shots) or (current.cannon and current.cannon.shots) or 0,
+      value = (new.cannon and new.cannon.value) or (current.cannon and current.cannon.value) or 0,
+    }
+  }
+end
+
+MAX_OPPONENTS = 5
+function updateDisplayForPlayers(players)
+  -- update target list
+  for _, player in pairs(players) do
+    local optionPosition = 1
+    for _, opponent in ipairs(sortedOpponents(players, player.factionName)) do
+      setAttributeForPlayer(player, 'opponentOption' .. optionPosition, 'active', true)
+      setAttributeForPlayer(player, 'opponentOption' .. optionPosition, 'text', opponent)
+      optionPosition = optionPosition + 1
+    end
+    while optionPosition <= MAX_OPPONENTS do
+      setAttributeForPlayer(player, 'opponentOption' .. optionPosition, 'active', false)
+      optionPosition = optionPosition + 1
+    end
+
+    -- TODO include action cards here as well
+    local techString = nil
+    for _, tech in pairs(player.techs) do
+      techString = ((techString and techString .. '\n') or '') .. tech.name
+    end
+    setAttributeForPlayer(player, 'techActionCardSummaryText', 'text', techString or '')
+    setAttributeForPlayer(player, 'winnuFlagshipNote', 'active', player.units.flagship.displayWinnuNote)
+    setAttributeForPlayer(player, 'plasmaScoringSelection', 'active', player.enablePlasmaScoring)
+  end
+end
+
+function sortedOpponents(players, currentPlayerFactionName)
+  local factionNames = {}
+  for _, player in pairs(players) do
+    if player.factionName != currentPlayerFactionName then
+      table.insert(factionNames, player.factionName)
+    end
+  end
+  table.sort(factionNames)
+  return factionNames
+end
+
+function setAttributeForPlayer(player, elementBaseId, attribute, value)
+  UI.setAttribute(elementBaseId .. '--' .. player.color, attribute, value or false)
+end
+
 -------------------------------------
 -------------------------------------
 -- functions for the token warning --
