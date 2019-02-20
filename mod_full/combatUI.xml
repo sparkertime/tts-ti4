@@ -26,13 +26,13 @@
       <VerticalLayout class='combatSection' preferredHeight='150' flexibleHeight='0' childForceExpandHeight='0'>
         <Text class='sectionTitle'>TECHS</Text>
         <VerticalScrollView preferredHeight='95' flexibleHeight='1' verticalScrollbarVisibility='AutoHide'>
-          <Text id='techSummaryText--red' class='summaryText' height='90' horizontalOverflow='Wrap'>(summary here)</Text>
+          <Text id='techSummaryText--red' class='summaryText' height='90' horizontalOverflow='Wrap'></Text>
         </VerticalScrollView>
       </VerticalLayout>
       <VerticalLayout class='combatSection' preferredHeight='150' flexibleHeight='0' childForceExpandHeight='0'>
         <Text class='sectionTitle'>MODIFIERS</Text>
         <VerticalScrollView preferredHeight='95' flexibleHeight='1' verticalScrollbarVisibility='AutoHide'>
-          <Text id='modifierSummaryText--red' class='summaryText' height='90' horizontalOverflow='Wrap'>(summary here)</Text>
+          <Text id='modifierSummaryText--red' class='summaryText' height='90' horizontalOverflow='Wrap'>(coming soon - for now, apply after the roll)</Text>
         </VerticalScrollView>
       </VerticalLayout>
     </HorizontalLayout>
@@ -121,15 +121,15 @@
     <HorizontalLayout preferredHeight='140' flexibleHeight='0' childForceExpandWidth='0'>
       <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='0' preferredWidth='200' childForceExpandHeight='0'>
         <Text class='sectionTitle'>ROLL TYPE</Text>
-        <Dropdown onValueChanged="optionSelected" flexibleHeight='0' preferredHeight='30'>
+        <Dropdown id='combatDropdown--red' onValueChanged='combatTypeChanged' flexibleHeight='0' preferredHeight='30'>
           <Option selected="true">Combat</Option>
           <Option>Space Cannon</Option>
           <Option>Bombardment</Option>
           <Option>Anti-Fighter Barrage</Option>
         </Dropdown>
         <Text class='sectionTitle'>OPTIONS</Text>
-        <Toggle flexibleHeight='1'>Defending Nebula?</Toggle>
-        <Toggle id='plasmaScoringSelection--red' isOn="true" flexibleHeight='1'>Use Plasma Scoring?</Toggle>
+        <Toggle id='nebulaDefenseToggle--red' flexibleHeight='1'>Defending Nebula?</Toggle>
+        <Toggle id='plasmaScoringToggle--red' isOn="true" flexibleHeight='1'>Use Plasma Scoring?</Toggle>
       </VerticalLayout>
       <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='1' childForceExpandHeight='0'>
         <Text class='sectionTitle'>TARGET</Text>

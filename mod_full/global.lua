@@ -305,6 +305,7 @@ MODIFIERS = {
     name = 'Bunker [AC]',
     objName = 'Bunker',
     penalty = {
+      name = 'Bunker [Opponent]',
       all = {bombard = {value = -4}}
     }
   },
@@ -327,18 +328,60 @@ MODIFIERS = {
     all = {combat = {value = 1}}
   },
   {
-    name = 'Tekklar Legion [PN]',
+    name = 'Tekklar Legion',
     objName = 'Tekklar Legion',
     all = {combat = {value = 1}},
-    penalty = {combat = {value = -1}},
+    penalty = {
+      name = 'Tekklar Legion [Opponent]',
+      all = {combat = {value = -1}},
+    },
     penaltyFaction = 'Sardakk N\'orr'
   },
   {
-    name = 'Antimass Deflectors [Opponent]',
+    name = 'Antimass Deflectors',
     objName = 'Antimass Deflectors',
-    penalty = {cannon = {value = -1}},
-  },
+    penalty = {
+      name = 'Antimass Deflectors [Opponent]',
+      all = {cannon = {value = -1}},
+    }
+  }
 }
+
+NEBULA_DEFENSE_MODIFIER = {
+  name = 'Nebula Defense',
+  all = {combat = {value = 1}}
+}
+
+PLASMA_SCORING_MODIFIER = {
+  name = 'Plasma Scoring',
+  cannon = {addOneToBest = true},
+  bombard = {addOneToBest = true},
+}
+
+ROLL_TYPE_SELECTIONS = {
+  red = 'combat',
+  yellow = 'combat',
+  green = 'combat',
+  white = 'combat',
+  blue = 'combat',
+  purple = 'combat',
+}
+
+-- funky workaround for https://github.com/Berserk-Games/Tabletop-Simulator-API/issues/25
+function combatTypeChanged(_, value, elementId)
+  local _, _, color = string.find(elementId, "--(.+)$")
+  if value == 'Combat' then
+    ROLL_TYPE_SELECTIONS[color] = 'combat'
+  elseif value == 'Space Cannon' then
+    ROLL_TYPE_SELECTIONS[color] = 'cannon'
+  elseif value == 'Bombardment' then
+    ROLL_TYPE_SELECTIONS[color] = 'bombard'
+  elseif value == 'Anti-Fighter Barrage' then
+    ROLL_TYPE_SELECTIONS[color] = 'barrage'
+  else
+    broadcastToAll('Unknown combatType ' .. value)
+  end
+end
 
 function colorFromId(elementId)
   local _, _, color = string.find(elementId, "--(.+)$")
@@ -358,10 +401,9 @@ end
 function refreshCombatModifiers(_, _, elementId)
   local players = collectPlayers()
   addUnitStats(players)
-  addUnitPool(players)
-  -- build initial pool based on numbers in UI
+  addUISettings(players)
+  -- applyModifiers(players)
   -- apply card modifiers (incl. those based on target)
-    -- apply nebula and plasma scoring
   updateDisplayForPlayers(players)
   --UI.setAttribute('techActionCardSummaryText--red', 'height', math.max(98, #techs * 15))
 end
@@ -384,7 +426,7 @@ function collectPlayers()
         }
       end
       for _, modifier in pairs(MODIFIERS) do
-        if modifier.objName == objName then
+        if modifier.objName and modifier.objName == objName then
           modifiersByColor[drawerColor] = modifiersByColor[drawerColor] or {}
           table.insert(modifiersByColor[drawerColor], modifier)
         end
@@ -511,11 +553,37 @@ function setAttributeForPlayer(player, elementBaseId, attribute, value)
   UI.setAttribute(elementBaseId .. '--' .. player.color, attribute, value or false)
 end
 
-function addUnitPool(players)
+function getAttributeForPlayer(player, elementBaseId, attribute)
+  return UI.getAttribute(elementBaseId .. '--' .. player.color, attribute)
+end
+
+function addUISettings(players)
   for _, player in pairs(players) do
     player.unitPool = {}
     for _, unitKey in pairs(UNIT_KEYS) do
       player.unitPool[unitKey] = getUnitCountForColor(player.color, unitKey)
+    end
+
+    player.rollType = ROLL_TYPE_SELECTIONS[player.color]
+  
+    if getAttributeForPlayer(player, 'nebulaDefenseToggle', 'isOn') == 'True' then
+      table.insert(player.modifiers, NEBULA_DEFENSE_MODIFIER)
+    end
+    if player.enablePlasmaScoring and getAttributeForPlayer(player, 'plasmaScoringToggle', 'isOn') == 'True' then
+      table.insert(player.modifiers, PLASMA_SCORING_MODIFIER)
+    end
+
+    local optionPosition = 1
+    while optionPosition <= MAX_OPPONENTS do
+      if getAttributeForPlayer(player, 'opponentOption' .. optionPosition, 'isOn') == 'True' then
+        local targetFaction = getAttributeForPlayer(player, 'opponentOption' .. optionPosition, 'text')
+        for _, modifier in pairs(players[targetFaction].modifiers) do
+          if modifier.penalty and (not modifier.penaltyFaction or modifier.penaltyFaction == player.factionName) then
+            table.insert(player.modifiers, modifier.penalty)
+          end
+        end
+      end
+      optionPosition = optionPosition + 1
     end
   end
 end
