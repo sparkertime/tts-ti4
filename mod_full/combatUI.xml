@@ -5,6 +5,7 @@
   <!-- add visibility='Red' to the below when you're ready to expand to player colors -->
   <Panel class='combatPanel-red' outlineSize='2 2' allowDragging='false' raycastTarget="true" outline='#912A1F' color='#B5675E'>
     <Button color='#ffdddd' />
+    <Button class='buttonSecondary' color='#eeeeee' />
     <VerticalLayout class='combatSection' outline='#912A1F' color='#ffffff' padding='6 6 3 3' />
   </Panel>
   <Text class='sectionTitle' fontStyle='Bold' fontSize='16' preferredHeight='25' flexibleHeight='0' />
@@ -109,7 +110,7 @@
     </VerticalLayout>
 
     <HorizontalLayout preferredHeight='140' flexibleHeight='0' childForceExpandWidth='0'>
-      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='0' preferredWidth='200' childForceExpandHeight='0'>
+      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='0' preferredWidth='250' childForceExpandHeight='0'>
         <Text class='sectionTitle'>ROLL TYPE</Text>
         <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
           <Option selected="true">Combat</Option>
@@ -135,6 +136,9 @@
       <Text id='rollSummaryText--red' flexibleHeight='1' alignment='UpperLeft' resizeTextForBestFit='true' horizontalOverflow='Wrap'>(summary here)</Text>
     </VerticalLayout>
 
-    <Button id="rollButton" text="Roll!" onClick='rollCombatDice' fontSize='18' preferredHeight='50' flexibleHeight='0' fontStyle='Bold' />
+    <HorizontalLayout preferredHeight='50' flexibleHeight='0' childForceExpandWidth='0' padding='0 0 0 4'>
+      <Button id="rollButton--red" text="Roll!" onClick='rollCombatDice' fontSize='18' flexibleWidth='0' preferredWidth='350' fontStyle='Bold' />
+      <Button id="resetButton--red" class='buttonSecondary' text="Reset" onClick='reset' fontSize='18' flexibleWidth='1' />
+    </HorizontalLayout>
   </VerticalLayout>
 </Panel>
