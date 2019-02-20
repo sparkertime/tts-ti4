@@ -351,11 +351,11 @@ end
 function refreshCombatModifiers(_, _, elementId)
   local players = collectPlayers()
   addUnitStats(players)
-  updateDisplayForPlayers(players)
-    -- set displays based on faction and stats
-    -- build initial pool based on numbers in UI
-    -- apply card modifiers (incl. those based on target)
+  addUnitPool(players)
+  -- build initial pool based on numbers in UI
+  -- apply card modifiers (incl. those based on target)
     -- apply nebula and plasma scoring
+  updateDisplayForPlayers(players)
     -- summarize and cache for roll
   --UI.setAttribute('techActionCardSummaryText--red', 'height', math.max(98, #techs * 15))
 end
@@ -503,6 +503,37 @@ end
 
 function setAttributeForPlayer(player, elementBaseId, attribute, value)
   UI.setAttribute(elementBaseId .. '--' .. player.color, attribute, value or false)
+end
+
+function addUnitPool(players)
+  for _, player in pairs(players) do
+    player.unitPool = {}
+    for _, unitKey in pairs(UNIT_KEYS) do
+      player.unitPool[unitKey] = getUnitCountForColor(player.color, unitKey)
+    end
+  end
+end
+
+function getUnitCountForColor(color, unit)
+  return tonumber(UI.getAttribute('unitCount--' .. unit .. '--' .. color, 'text'))
+end
+
+function incrementUnit(_, unitKey, elementId)
+  local _, _, color = string.find(elementId, '--(%a+)$')
+  UI.setAttribute(
+    'unitCount--' .. unitKey .. '--' .. color,
+    'text',
+    math.min(getUnitCountForColor(color, unitKey) + 1, 99)
+  )
+end
+
+function decrementUnit(_, unitKey, elementId)
+  local _, _, color = string.find(elementId, '--(%a+)$')
+  UI.setAttribute(
+    'unitCount--' .. unitKey .. '--' .. color,
+    'text',
+    math.max(getUnitCountForColor(color, unitKey) - 1, 0)
+  )
 end
 
 -------------------------------------

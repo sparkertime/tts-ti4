@@ -36,58 +36,58 @@
           <Row>
             <Cell><Image image='unit-infantry' /></Cell>
             <Cell><Text id='unitLabel--infantry--red' class='unitLabel'>Infantry</Text></Cell>
-            <Cell><Button id='decrementButton--infantry--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--infantry--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--infantry--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--infantry--red' class='counterButton' text='&lt;' onClick='decrementUnit(infantry)'/></Cell>
+            <Cell><Text id='unitCount--infantry--red' text='0' class='counterText' /></Cell>
+            <Cell><Button id='incrementButton--infantry--red' class='counterButton' text='&gt;' onClick='incrementUnit(infantry)'/></Cell>
           </Row>
           <Row>
             <Cell><Image image='unit-fighter' /></Cell>
             <Cell><Text id='unitLabel--fighter--red' class='unitLabel'>Fighter</Text></Cell>
-            <Cell><Button id='decrementButton--fighter--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--fighter--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--fighter--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--fighter--red' class='counterButton' text='&lt;' onClick='decrementUnit(fighter)'/></Cell>
+            <Cell><Text id='unitCount--fighter--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--fighter--red' class='counterButton' text='&gt;' onClick='incrementUnit(fighter)'/></Cell>
           </Row>
           <Row>
             <Cell><Image image='unit-pds' /></Cell>
             <Cell><Text id='unitLabel--pds--red' class='unitLabel'>PDS</Text></Cell>
-            <Cell><Button id='decrementButton--pds--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--pds--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--pds--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--pds--red' class='counterButton' text='&lt;' onClick='decrementUnit(pds)'/></Cell>
+            <Cell><Text id='unitCount--pds--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--pds--red' class='counterButton' text='&gt;' onClick='incrementUnit(pds)'/></Cell>
           </Row>
           <Row id='unitTable_dockRow--red'>
             <Cell><Image image='unit-dock' /></Cell>
             <Cell><Text id='unitLabel--dock--red' class='unitLabel'>Experimental Battlestation</Text></Cell>
-            <Cell><Button id='decrementButton--dock--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--dock--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--dock--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--dock--red' class='counterButton' text='&lt;' onClick='decrementUnit(dock)'/></Cell>
+            <Cell><Text id='unitCount--dock--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--dock--red' class='counterButton' text='&gt;' onClick='incrementUnit(dock)'/></Cell>
           </Row>
           <Row>
             <Cell><Image image='unit-carrier' /></Cell>
             <Cell><Text id='unitLabel--carrier--red' class='unitLabel'>Carrier</Text></Cell>
-            <Cell><Button id='decrementButton--carrier--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--carrier--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--carrier--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--carrier--red' class='counterButton' text='&lt;' onClick='decrementUnit(carrier)'/></Cell>
+            <Cell><Text id='unitCount--carrier--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--carrier--red' class='counterButton' text='&gt;' onClick='incrementUnit(carrier)'/></Cell>
           </Row>
           <Row>
             <Cell><Image image='unit-cruiser' /></Cell>
             <Cell><Text id='unitLabel--cruiser--red' class='unitLabel'>Cruiser</Text></Cell>
-            <Cell><Button id='decrementButton--cruiser--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--cruiser--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--cruiser--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--cruiser--red' class='counterButton' text='&lt;' onClick='decrementUnit(cruiser)'/></Cell>
+            <Cell><Text id='unitCount--cruiser--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--cruiser--red' class='counterButton' text='&gt;' onClick='incrementUnit(cruiser)'/></Cell>
           </Row>
           <Row>
             <Cell><Image image='unit-destroyer' /></Cell>
             <Cell><Text id='unitLabel--destroyer--red' class='unitLabel'>Destroyer</Text></Cell>
-            <Cell><Button id='decrementButton--destroyer--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--destroyer--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--destroyer--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--destroyer--red' class='counterButton' text='&lt;' onClick='decrementUnit(destroyer)'/></Cell>
+            <Cell><Text id='unitCount--destroyer--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--destroyer--red' class='counterButton' text='&gt;' onClick='incrementUnit(destroyer)'/></Cell>
           </Row>
           <Row>
             <Cell><Image image='unit-dreadnought' /></Cell>
             <Cell><Text id='unitLabel--dreadnought--red' class='unitLabel'>Dreadnought</Text></Cell>
-            <Cell><Button id='decrementButton--dreadnought--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--dreadnought--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--dreadnought--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--dreadnought--red' class='counterButton' text='&lt;' onClick='decrementUnit(dreadnought)'/></Cell>
+            <Cell><Text id='unitCount--dreadnought--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--dreadnought--red' class='counterButton' text='&gt;' onClick='incrementUnit(dreadnought)'/></Cell>
           </Row>
           <Row id='winnuFlagshipNote--red'>
             <Cell columnSpan='5'><Text>WINNU FLAGSHIP: Enter # of enemy ships below instead.</Text></Cell>
@@ -95,16 +95,16 @@
           <Row>
             <Cell><Image image='unit-flagship' /></Cell>
             <Cell><Text id='unitLabel--flagship--red' class='unitLabel'>Flagship</Text></Cell>
-            <Cell><Button id='decrementButton--flagship--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--flagship--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--flagship--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--flagship--red' class='counterButton' text='&lt;' onClick='decrementUnit(flagship)'/></Cell>
+            <Cell><Text id='unitCount--flagship--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--flagship--red' class='counterButton' text='&gt;' onClick='incrementUnit(flagship)'/></Cell>
           </Row>
           <Row>
             <Cell><Image image='unit-warsun' /></Cell>
             <Cell><Text id='unitLabel--warsun--red' class='unitLabel'>War Sun</Text></Cell>
-            <Cell><Button id='decrementButton--warsun--red' class='counterButton' text='&lt;' onClick='decrementUnit'/></Cell>
-            <Cell><Text id='unitCount--warsun--red' class='counterText'>0</Text></Cell>
-            <Cell><Button id='incrementButton--warsun--red' class='counterButton' text='&gt;' onClick='incrementUnit'/></Cell>
+            <Cell><Button id='decrementButton--warsun--red' class='counterButton' text='&lt;' onClick='decrementUnit(warsun)'/></Cell>
+            <Cell><Text id='unitCount--warsun--red' class='counterText' text='0' /></Cell>
+            <Cell><Button id='incrementButton--warsun--red' class='counterButton' text='&gt;' onClick='incrementUnit(warsun)'/></Cell>
           </Row>
         </TableLayout>
     </VerticalLayout>
