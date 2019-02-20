@@ -3,7 +3,7 @@
   <Panel allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <VerticalLayout allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <!-- add visibility='Red' to the below when you're ready to expand to player colors -->
-  <Panel class='combatPanel-red' outlineSize='2 2' allowDragging='false' raycastTarget="true" outline='#912A1F' color='#B5675E'>
+  <Panel class='combatPanel--red' outlineSize='2 2' allowDragging='false' raycastTarget="true" outline='#912A1F' color='#B5675E'>
     <Button color='#ffdddd' />
     <Button class='buttonSecondary' color='#eeeeee' />
     <VerticalLayout class='combatSection' outline='#912A1F' color='#ffffff' padding='6 6 3 3' />
@@ -16,10 +16,10 @@
 </Defaults>
 
 <Panel class='combatPanel-red' rectAlignment="LowerRight" active='true' padding='3 3 3 3' offsetXY="-100 15" width="150" height="50">
-  <ToggleButton id="combatTogglePanel__button" text="Show Combat Roller" onValueChanged="toggleCombatRoller" isOn='false' />
+  <ToggleButton id="combatToggle--red" text="Show Combat Roller" onValueChanged="toggleCombatRoller" isOn='false' />
 </Panel>
 
-<Panel id='combatPanel' class='combatPanel-red' active='false' rectAlignment="UpperRight" offsetXY='-10 -4' width='430' height='90%' flexibleHeight='true'>
+<Panel id='combatPanel--red' class='combatPanel--red' active='false' rectAlignment="UpperRight" offsetXY='-10 -4' width='430' height='90%' flexibleHeight='true'>
   <VerticalLayout height='100%' childForceExpandHeight='0' spacing='5'>
 
     <HorizontalLayout preferredHeight='120' flexibleHeight='0' childForceExpandWidth='0'>

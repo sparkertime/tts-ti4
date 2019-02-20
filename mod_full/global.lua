@@ -388,16 +388,6 @@ function colorFromId(elementId)
   return color
 end
 
-function toggleCombatRoller(player, isOn, element)
-  if isOn == 'True' then
-    UI.setAttribute("combatTogglePanel__button", "text", 'Hide Combat Roller')
-    UI.setAttribute('combatPanel', 'active', true)
-  else
-    UI.setAttribute("combatTogglePanel__button", "text", 'Show Combat Roller')
-    UI.setAttribute('combatPanel', 'active', false)
-  end 
-end
-
 function refreshCombatModifiers(_, _, elementId)
   local players = collectPlayers()
   addUnitStats(players)
@@ -608,6 +598,17 @@ function decrementUnit(_, unitKey, elementId)
     'text',
     math.max(getUnitCountForColor(color, unitKey) - 1, 0)
   )
+end
+
+function toggleCombatRoller(_, isOn, element)
+  local color = colorFromId(element)
+  if isOn == 'True' then
+    UI.setAttribute('combatToggle--' .. color, "text", 'Hide Combat Roller')
+    UI.setAttribute('combatPanel--' .. color, 'active', true)
+  else
+    UI.setAttribute('combatToggle--' .. color, "text", 'Show Combat Roller')
+    UI.setAttribute('combatPanel--' .. color, 'active', false)
+  end 
 end
 
 -------------------------------------
