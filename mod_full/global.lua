@@ -87,6 +87,13 @@ TECHS = {
     }
   },
   {
+    name = 'Spec Ops II',
+    infantry = {
+      name = 'Spec Ops II',
+      combat = {shots = 1, value = 6}
+    }
+  },
+  {
     name = 'Super-Dreadnought II',
     dreadnought = {
       name = 'Super-Dreadnought II',
@@ -327,7 +334,7 @@ MODIFIERS = {
     penaltyFaction = 'Sardakk N\'orr'
   },
   {
-    name = 'Antimass Deflectors [Tech]',
+    name = 'Antimass Deflectors [Opponent]',
     objName = 'Antimass Deflectors',
     penalty = {cannon = {value = -1}},
   },
@@ -356,7 +363,6 @@ function refreshCombatModifiers(_, _, elementId)
   -- apply card modifiers (incl. those based on target)
     -- apply nebula and plasma scoring
   updateDisplayForPlayers(players)
-    -- summarize and cache for roll
   --UI.setAttribute('techActionCardSummaryText--red', 'height', math.max(98, #techs * 15))
 end
 
@@ -484,7 +490,7 @@ function updateDisplayForPlayers(players)
     for _, tech in pairs(player.techs) do
       techString = ((techString and techString .. '\n') or '') .. tech.name
     end
-    setAttributeForPlayer(player, 'techActionCardSummaryText', 'text', techString or '')
+    setAttributeForPlayer(player, 'techSummaryText', 'text', techString or '')
     setAttributeForPlayer(player, 'winnuFlagshipNote', 'active', player.units.flagship.displayWinnuNote)
     setAttributeForPlayer(player, 'plasmaScoringSelection', 'active', player.enablePlasmaScoring)
   end
