@@ -3,7 +3,7 @@
   <Panel allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <VerticalLayout allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" />
   <!-- add visibility='Red' to the below when you're ready to expand to player colors -->
-  <Panel class='combatPanel-red' outlineSize='2 2' allowDragging='false' raycastTarget="true" rectAlignment="UpperRight" outline='#912A1F' color='#B5675E'>
+  <Panel class='combatPanel-red' outlineSize='2 2' allowDragging='false' raycastTarget="true" outline='#912A1F' color='#B5675E'>
     <Button color='#ffdddd' />
     <VerticalLayout class='combatSection' outline='#912A1F' color='#ffffff' padding='6 6 3 3' />
   </Panel>
@@ -14,11 +14,11 @@
   <Row preferredHeight='35' />
 </Defaults>
 
-<Panel class='combatPanel-red' active='true' padding='3 3 3 3' offsetXY="0 -50" width="150" height="50">
+<Panel class='combatPanel-red' rectAlignment="LowerRight" active='true' padding='3 3 3 3' offsetXY="-100 15" width="150" height="50">
   <ToggleButton id="combatTogglePanel__button" text="Show Combat Roller" onValueChanged="toggleCombatRoller" isOn='false' />
 </Panel>
 
-<Panel id='combatPanel' class='combatPanel-red' active='false' offsetXY='0 -110' width='400' height='80%' flexibleHeight='true'>
+<Panel id='combatPanel' class='combatPanel-red' active='false' rectAlignment="UpperRight" offsetXY='-10 -4' width='430' height='90%' flexibleHeight='true'>
   <VerticalLayout height='100%' childForceExpandHeight='0' spacing='5'>
 
     <VerticalLayout class='combatSection' preferredHeight='150' flexibleHeight='0' childForceExpandHeight='0'>
@@ -108,8 +108,8 @@
         </TableLayout>
     </VerticalLayout>
 
-    <HorizontalLayout preferredHeight='60' flexibleHeight='0'>
-      <VerticalLayout class='combatSection'>
+    <HorizontalLayout preferredHeight='140' flexibleHeight='0' childForceExpandWidth='0'>
+      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='0' preferredWidth='200' childForceExpandHeight='0'>
         <Text class='sectionTitle'>ROLL TYPE</Text>
         <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
           <Option selected="true">Combat</Option>
@@ -117,13 +117,16 @@
           <Option>Bombardment</Option>
           <Option>Anti-Fighter Barrage</Option>
         </Dropdown>
-      </VerticalLayout>
-      <VerticalLayout class='combatSection'>
         <Text class='sectionTitle'>TARGET</Text>
         <Dropdown onValueChanged="optionSelected" flexibleHeight='1'>
           <Option selected="true">(pick a faction)</Option>
           <Option>Universities of Jol-Nar</Option>
         </Dropdown>
+      </VerticalLayout>
+      <VerticalLayout class='combatSection' flexibleHeight='1' flexibleWidth='1' childForceExpandHeight='0'>
+        <Text class='sectionTitle'>OPTIONS</Text>
+        <Toggle flexibleHeight='1'>Defending Nebula?</Toggle>
+        <Toggle isOn="true" flexibleHeight='1'>Use Plasma Scoring?</Toggle>
       </VerticalLayout>
     </HorizontalLayout>
 
