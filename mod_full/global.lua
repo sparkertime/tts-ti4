@@ -5,12 +5,48 @@
 -------------------------------------
 
 DRAWERS = {
-  {color = 'yellow', xMin = 21, xMax = 51, zMin = -64.5, zMax = -24},
-  {color = 'red', xMin = -15, xMax = 15, zMin = -64.5, zMax = -24},
-  {color = 'green', xMin = -51, xMax = -21, zMin = -64.5, zMax = -24},
-  {color = 'purple', xMin = 21, xMax = 51, zMin = 24, zMax = 64.5},
-  {color = 'blue', xMin = -15, xMax = 15, zMin = 24, zMax = 64.5},
-  {color = 'white', xMin = -51, xMax = -21, zMin = 24, zMax = 64.5},
+  {
+    color = 'yellow',
+    areas = {
+      {xMin = 21, xMax = 51, zMin = -49.5, zMax = -24},
+      {xMin = 40, xMax = 51, zMin = -63.5, zMax = -50.5},
+    }
+  },
+  {
+    color = 'red',
+    areas = {
+      {xMin = -15, xMax = 15, zMin = -49.5, zMax = -24},
+      {xMin = 4, xMax = 15, zMin = -63.5, zMax = -50.5},
+    }
+  },
+  {
+    color = 'green',
+    areas = {
+      {xMin = -51, xMax = -21, zMin = -49.5, zMax = -24},
+      {xMin = -32, xMax = -21, zMin = -63.5, zMax = -50.5},
+    }
+  },
+  {
+    color = 'purple',
+    areas = {
+      {xMin = 21, xMax = 51, zMin = 24, zMax = 49.5},
+      {xMin = 21, xMax = 32, zMin = 50.5, zMax = 63.5},
+    }
+  },
+  {
+    color = 'blue',
+    areas = {
+      {xMin = -15, xMax = 15, zMin = 24, zMax = 49.5},
+      {xMin = -15, xMax = -4, zMin = 50.5, zMax = 63.5},
+    }
+  },
+  {
+    color = 'white',
+    areas = {
+      {xMin = -51, xMax = -21, zMin = 24, zMax = 49.5},
+      {xMin = -51, xMax = -40, zMin = 50.5, zMax = 63.5},
+    }
+  }
 }
 
 TECHS = {
@@ -19,20 +55,20 @@ TECHS = {
     fighter = {combat = {shots = 1, value = 8}}
   },
   {
-    name = 'Infantry II'
+    name = 'Infantry II',
     infantry = {combat = {shots = 1, value = 7}}
   },
   {
     name = 'PDS II',
     pds = {cannon = {shots = 1, value = 5}}
-  }},
+  },
   {
     name = 'Destroyer II',
     destroyer = {
       combat = {shots = 1, value = 8},
       barrage = {shots = 3, value = 6}
     }
-  }},
+  },
   {
     name = 'Cruiser II',
     cruiser = {combat = {shots = 1, value = 6}}
@@ -166,7 +202,7 @@ FACTIONS['Sardakk N\'orr'] = {
     },
     flagship = {
       combat = {shots = 2, value = 6},
-      modifier = {
+      bonus = {
         fighter = {combat = {value = 1}},
         carrier = {combat = {value = 1}},
         cruiser = {combat = {value = 1}},
@@ -188,6 +224,7 @@ FACTIONS['Universities of Jol-Nar'] = {
 FACTIONS['Winnu'] = {
   units = {
     flagship = {
+      displayWinnuNote = true,
       combat = {shots = 1, value = 7}, -- Actual # of shots determined in the UI
     }
   }
@@ -317,46 +354,68 @@ function toggleCombatRoller(player, isOn, element)
   end 
 end
 
-function describeElement(element)
-  local tag = '<' .. element.tag .. ' '
-  for key, value in pairs(element.attributes) do
-    local val = (type(value) == 'table' and '(table)') or value
-    tag = tag .. key .. '=' .. val .. ' '
-  end
-  broadcastToAll(tag .. ' />')
-end
-
-function findElement(id, uiCollection)
-  for _, element in pairs(uiCollection) do
-    if element.attributes.id == id then return element end
-    if element.children and #element.children > 0 then
-      local foundElement = findElement(id, element.children)
-      if foundElement then return foundElement end
-    end
-  end
-end
-
-function setElementInnerXml(id, tableOfChildren)
-  local uiCollection = UI.getXmlTable()
-  local element = findElement(id, uiCollection)
-  element.children = tableOfChildren
-  UI.setXmlTable(uiCollection)
-end
-
 function refreshCombatModifiers(_, _, elementId)
-  for _, obj in pairs(getAllObjects()) do
+  local factions = collectFactions()
     -- collect factions, techs & cards
     -- calculate base stats for all ships based on techs
     -- build initial pool based on numbers in UI
     -- apply card modifiers (incl. those based on target)
     -- apply nebula and plasma scoring
     -- summarize and cache for roll
-  end
   techs = {'Tech1', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4', 'Tech 2', 'Tech 3', 'Tech 4'}
   UI.setAttribute('techActionCardSummaryText--red', 'text', 'THIS\nIS\nON\nNEWLINES0\nAHOY\nIS\nON\nNEWLINES1\nIS\nON\nNEWLINES2')
   UI.setAttribute('techActionCardSummaryText--red', 'height', math.max(98, #techs * 15))
 end
 
+function collectFactions()
+  local factions = {}
+  local modifiersByColor = {}
+
+  for _, obj in pairs(getAllObjects()) do
+    local drawerColor = getDrawerColor(obj)
+    if drawerColor then
+      local objName = obj.getName()
+      local factionName = getFactionName(objName)
+      if factionName then
+        factions[factionName] = {
+          factionName = factionName,
+          color = drawerColor
+        }
+      end
+      for _, modifier in pairs(MODIFIERS) do
+        if modifier.objName == objName then
+          modifiersByColor[drawerColor] = modifiersByColor[drawerColor] or {}
+          table.insert(modifiersByColor[drawerColor], modifier)
+        end
+      end
+    end
+  end
+
+  for _, faction in pairs(factions) do
+    faction.modifiers = modifiersByColor[faction.color]
+  end
+
+  return factions
+end
+
+function getDrawerColor(obj)
+  local position = obj.getPosition()
+
+  for _, drawer in ipairs(DRAWERS) do
+    for _, area in drawer.areas do
+      if position.x >= area.xMin and position.x <= area.xMax and position.z >= area.zMin and position.z <= area.zMax then
+        return drawer.color
+      end
+    end
+  end
+
+  return nil
+end
+
+function getFactionName(objName)
+  local _, _, factionName = string.find(token.getName(), "The (.+) Sheet$")
+  return factionName
+end
 -------------------------------------
 -------------------------------------
 -- functions for the token warning --
